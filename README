@@ -1,0 +1,15 @@
+Project EPILATION:
+
+Steps list :
+-modify code	CS
+-recompile	CS
+-re execute	CS
+-action list	CA
+-set action	CA
+-del action	CA
+-get action	CA
+-next action	CA
+-apply action	CA
+
+CS -> Class System
+CA -> Class Action
