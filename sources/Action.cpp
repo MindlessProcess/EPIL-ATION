@@ -15,6 +15,23 @@ std::string	Action::getAction() const { return _action; }
 void		Action::setType(e_AType type) { _type = type; }
 void		Action::setAction(std::string action { _action = action; }
 
+static const bool	modify()
+{
+  // write... 
+}
+
+static const bool	compile()
+{
+  // access();
+  // exec();
+}
+
+static const bool	exec()
+{
+  // fork()
+  // setpgid()
+}
+
 bool		Action::apply()
 {
   switch _type
