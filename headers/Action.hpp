@@ -15,8 +15,8 @@ namespace	epil
   {  
     AType		_type;
     bool		_state;
-    std::string		_action;
     bool		(*_fnc)();
+    std::string		_action;
 
   public:
     Action();
