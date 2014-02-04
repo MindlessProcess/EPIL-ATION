@@ -1,5 +1,5 @@
-#ifndef ACTION_H_
-# define ACTION_H_
+#ifndef ACTION_HPP_
+# define ACTION_HPP_
 
 namespace	epil
 {
@@ -18,8 +18,8 @@ namespace	epil
     bool		(*_fnc)();
     std::string		_action;
 
-  public:
     Action();
+  public:
     Action(AType type);
     Action(AType type, std::string action);
     Action(Action &);
@@ -39,4 +39,4 @@ namespace	epil
 
 };
 
-#endif /* !ACTION_H_ */
+#endif /* !ACTION_HPP_ */
