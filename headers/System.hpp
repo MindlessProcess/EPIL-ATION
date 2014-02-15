@@ -13,7 +13,7 @@ namespace epil
     System();
     ~System();
 
-    void	setAction(Action);
+    void	setAction(Action) throw();
     void	setActionList(std::list<Action*>);
 
     Action&		getAction() const;
@@ -29,6 +29,7 @@ namespace epil
     void	reExecute();
   private:
     std::list<Action*>	_actionList;
+    std::list<Action*>	_tempAL;
   };
 }
 
