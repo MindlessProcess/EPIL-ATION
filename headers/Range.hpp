@@ -1,5 +1,5 @@
-#ifndef RANGE_H_
-# define RANGE_H_
+#ifndef RANGE_HPP_
+# define RANGE_HPP_
 
 # include <utility>
 
@@ -27,4 +27,4 @@ namespace	epil
 
 };
 
-#endif /* !RANGE_H_ */
+#endif /* !RANGE_HPP_ */
