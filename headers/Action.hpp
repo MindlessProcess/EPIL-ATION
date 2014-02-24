@@ -34,7 +34,7 @@ namespace	epil
 
     bool		apply();
 
-    Action & operator=(Action &);
+    Action &		operator=(Action &);
   };
 
 };
