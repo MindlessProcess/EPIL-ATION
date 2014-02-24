@@ -1,5 +1,7 @@
 #include "Action.hpp"
 
+#include <iostream>
+
 using namespace epil;
 
 static const bool	modify()
@@ -54,6 +56,7 @@ bool		Action::apply()
   switch _type
     {
     case NIL:
+      std::cerr << "No Action has been set" << std::endl;
       return false;
     case MODIFY:
 
