@@ -1,0 +1,10 @@
+Un bloc est un ensemble de lignes.
+Lorsque l'on compare des blocs, on se fiche de leur taille ; seul le nombre de blocs à comparer doit être identique.
+
+Exemple :
+
+L'utilisateur veut modifier les lignes 4, 5, 6, 8, 9, 10, 13 et 14 du fichier DST.
+En terme de blocs, il veut modifier le bloc {4-6}, le bloc {8-9}, le bloc {10} et le bloc {13-14}, soit 4 blocs.
+Il veut les remplacer par les lignes 2, 3, 5, 8, 9, 10, 11, 12, 13, 16.
+Encore en terme de blocs, il veut remplacer les précédents par le bloc {2-3}, le bloc {5}, le bloc {8-9-10-11-12-13}, le bloc {16}, soit 4 blocs.
+On voit que l'utilisateur veut modifier 4 blocs par 4 blocs, et que les blocs ont des tailles différentes : seul le nombre de blocs importe.
