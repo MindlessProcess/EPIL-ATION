@@ -1,0 +1,55 @@
+\documentclass[12pt,a4paper]{article}
+\title{\textbf{EPITECH PFA - EPIL}(ATION)\\
+  \textbf{Easy Programming Interaction Library}\\
+  (And Transformation Interface On 'Nux)}
+
+\author{Lyoma GUILLOU, Lucas MERLETTE}
+\date{21/01/2014}
+
+\begin{document}
+\maketitle
+
+\newpage
+\section{Introduction}
+Le projet EPIL est une librairie qui permet \`{a} un processus de faciliter la modification de son code source ainsi que de le relancer en une nouvelle instance.
+
+\section{Contexte}
+Le programme impl\'{e}mentant EPIL dresse une liste d'\'{e}v\'{e}nements dont il souhaite modifier le comportement.
+Lorsqu'un \'{e}v\'{e}nement est rencontr\'{e}, le programme indique \`{a} EPIL quelles actions mener : modification du code source, recompilation du programme, relancement du programme.\\
+Les actions peuvent \^{e}tre men\'{e}es ind\'{e}pendament des autres et dans n'importe quel ordre, ce qui laisse \`{a} l'utilisateur le choix de l'ex\'{e}cution de son programme.
+
+\newpage
+\section{Equipe}
+Lyoma GUILLOU - Chef de Projet\\
+Lucas MERLETTE - Concepteur g\'{e}n\'{e}ral
+
+\section{Objectifs}
+Les objectifs fix\'{e}s pour notre programme principal sont:
+\\- L'\'{e}laboration d'une couche de communication entre la librairie EPIL et le programme, symbolis\'{e}e par des fonctions.
+\\- Le d\'{e}veloppement de fonctions appliquant les fonctionnalit\'{e}s de EPIL: modification du code, recompilion du programme, relancement du programme.
+
+\section{Planning General}
+
+\begin{enumerate}
+\item Lun. 27 Jan. 2014 - Conception, Brainstorm
+\begin{itemize}
+\item[-] Venir avec un plan (Lyoma, Lucas)
+\end{itemize}
+\item Sam. 15 F\'{e}v. 2014 - Couche communication \'{e}labor\'{e}e
+\begin{itemize}
+\item[-] Classes Epil et Profile (Lucas)
+\item[-] Classe Range (Lyoma)
+\end{itemize}
+\item Sam. 08 Mar. 2014 - Fonctionnalit\'{e}s de EPIL (voir Objectifs) d\'{e}velopp\'{e}es
+\begin{itemize}
+\item[-] Classe System : liaison avec la couche de communication (Lucas)
+\item[-] Classes Action et System : liaison avec Action  (Lyoma)
+\end{itemize}
+\item Sam. 29 Mar. 2014 - Ensemble d'applications d\'{e}monstratives
+\begin{itemize}
+\item[-] D\'{e}velopper des applications de test (Lyoma, Lucas)
+\item[-] R\'{e}diger la documentation (Lucas)
+\end{itemize}
+\end{enumerate}
+
+\end{document}
