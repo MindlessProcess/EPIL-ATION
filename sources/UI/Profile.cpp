@@ -1,4 +1,16 @@
-#include  "Profile.hpp"
+//
+// Profile.cpp for Epil in /home/lucas/Documents/Epitech/Tech3/PFA/epil-ation/sources/UI
+// 
+// Made by Lucas Merlette
+// Login   <lucas@epitech.net>
+// 
+// Started on  Mon Feb 24 23:40:15 2014 Lucas Merlette
+// Last update Mon Feb 24 23:54:21 2014 Lucas Merlette
+//
+
+#include  "Profile.hh"
+
+using namespace	epil;
 
 Profile::Profile()
 {
