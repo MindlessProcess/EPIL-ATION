@@ -5,7 +5,7 @@
 ## Login   <lucas@epitech.net>
 ## 
 ## Started on  Mon Feb 24 23:44:12 2014 Lucas Merlette
-## Last update Mon Feb 24 23:46:19 2014 Lucas Merlette
+## Last update Tue Feb 25 00:45:59 2014 Lucas Merlette
 ##
 
 NAME	= epil
@@ -16,11 +16,13 @@ SRCS_P	= sources/
 MAIN_P	= main/
 SRCS	= $(MAIN_P)main.cpp	\
 	$(SRCS_P)Epil.cpp	\
-	$(SRCS_P)UI/Profile.cpp
+	$(SRCS_P)UI/Profile.cpp	\
+	$(SRCS_P)Modules/Block.cpp
 INC_P	= -Iheaders/
 INC	= $(INC_P) \
-	$(INC_P)UI
-CFLAGS	= -W -Wall -Wextra -Werror
+	$(INC_P)UI \
+	$(INC_P)Modules
+CFLAGS	= -W -Wall -Wextra -Werror -std=c++11
 
 all	: $(NAME)
 $(NAME)	: $(OBJS)
