@@ -5,7 +5,7 @@
 ## Login   <lucas@epitech.net>
 ## 
 ## Started on  Mon Feb 24 23:44:12 2014 Lucas Merlette
-## Last update Tue Feb 25 00:45:59 2014 Lucas Merlette
+## Last update Wed Feb 26 14:03:04 2014 Lucas Merlette
 ##
 
 NAME	= epil
@@ -22,7 +22,7 @@ INC_P	= -Iheaders/
 INC	= $(INC_P) \
 	$(INC_P)UI \
 	$(INC_P)Modules
-CFLAGS	= -W -Wall -Wextra -Werror -std=c++11
+CFLAGS	= -W -Wall -Wextra -Werror -std=c++0x
 
 all	: $(NAME)
 $(NAME)	: $(OBJS)
