@@ -1,0 +1,104 @@
+==================================
+||				||
+|| EPILATION Writing Convention ||
+|| 	     	     		||
+==================================
+
+===========================
+| Summary :		  |
+|-------------------------|
+| 1. Header files	  |
+|    1.1 Preprocessing	  |
+|    1.2 Namespaces	  |
+|    1.3 Classes	  |
+|        1.3.1 Privacy	  |
+|        1.3.2 Attributes |
+|        1.3.3 Methods	  |
+| 2. Source files	  |
+===========================
+
+
+----------------------
+||                   |
+|| 1. Header files   |
+||                   |
+----------------------
+
+------------------------
+|| 1.1 | Preprocessing |
+------------------------
+Une définition de fichier par un #ifndef & un #define doit être de la forme suivante :
+PROJECT_PATH_NAME_H*_
+avec PROJECT étant le nom du projet, PATH étant le chemin complet jusqu'au fichier depuis le dossier headers, NAME le nom complet du fichier et H* l'extension du fichier.
+Les instructions de preprocessing doivent être indentées après chaque structure conditionnelle par un seul espace et les valeurs des instructions doivent être alignées
+Un ordre spécifique doit être appliqué pour les inclusions de fichier :
+- C system files
+- C++ system files
+- External header files
+- Project's header files
+
+------------------------
+|| 1.2 | Namespaces    |
+------------------------
+Les namespaces sont en lettres minuscules sans séparateur et le plus court mais clair possible,
+généralement le nom du projet ou de la section (UI, Modules, Process, etc.)
+On peut utiliser un using namespace dans le background que l'utilisateur n'est pas censé lire,
+mais pas dans le foreground pour que l'utilisateur appréhende plus facilement l'architecture du projet.
+
+------------------------
+|| 1.3 | Classes       |
+------------------------
+Une classe doit avoir un nom en FullCamelCase : class MyClass
+Le nom de la classe doit être le plus clair et précis possible, sans tenir compte de sa taille.
+
+1.3.1 Privacy
+-------------
+Une classe a par défaut ses attributs et méthodes en private.
+Pour suivre la logique du type d'utilisateur lisant la classe, on met les éléments dans l'ordre suivant :
+public    -> tous les types d'utilisateurs veulent consulter les éléments publiques
+protected -> seuls les utilisateurs voulant manipuler la classe au moins par héritage doivent consulter les éléments protected
+private   -> cette partie n'intéresse que les utilisateurs voulant modifier la classe
+
+1.3.2 Attributes
+----------------
+/!\ Y réfléchir /!\
+Mettre les attributs en premier dans chaque Privacy.
+Ils doivent être triés en fonction de leurs poids : les attributs const en premier, puis les attributs les plus petits et les moins susceptibles de changer la logique de la classe.
+Puis viennent ensuite les attributs de poids fort, qui peuvent modifier le comportement du programme (ex. Strategy Pattern)
+
+1.3.3 Methods
+-------------
+
+------------------------
+|| 1.3 | Structure     |
+------------------------
+La différence technique entre une structure et une classe en C++ réside dans la privatisation des méthodes et attributs par défaut :
+Ils sont publiques pour une structure, privés pour une classe.
+Les structures sont utilisées pour décrire un paquet de données -méthodes ou attributs- logique, mais qui n'a pas de notion d'évolution.
+Par exemple, pour définir un ensemble de données faisant des calculs simples et renvoyant une valeur, on utilisera une structure :
+struct	MyCalculStruct
+{
+  T add(T x, T y);
+  T sub(T x, T y);
+  T mul(T x, T y);
+  T div(T x, T y);
+};
+Une carte de visite est un objet "constant" : il possède certaines caractéristiques mais n'a pas de notion d'évolution.
+De plus, chaque élément de la carte de visite est accessible (IRL: aucune information n'est cachée sur la CDV) en publique.
+struct	CarteDeVisite
+{
+  std::string ownerName;
+  std::string ownerTel;
+  std::string companyName;
+  std::string companyTel;
+
+  std::size_t width;
+  std::size_t length;
+
+  std::size_t calculAire();
+  std::size_t calculSurface();
+};
+
+Puisqu'une structure est généralement composée de petites et peu nombreuses méthodes, il peut être utile de :
+- les déclarer en inline et dans le fichier header
+- renommer le fichier MyStruct.hh en MyStruct.hpp
