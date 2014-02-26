@@ -1,15 +1,15 @@
-#include	"Epil.hpp"
+#include	"Epil.hh"
 
-void	set_profile(std::string const &id, Epil *epil)
+void	set_profile(std::string const &id, epil::Epil *epil)
 {
-  Profile	*profile= new Profile();
+  epil::Profile	*profile= new epil::Profile();
   profile->setId(id);
   epil->loadProfile(profile);
 }
 
 int	main()
 {
-  Epil	*epil = new Epil();
+  epil::Epil	*epil = new epil::Epil();
   set_profile("SIGSEV", epil);
   set_profile("SIGERR", epil);
   set_profile("SIGHANDLER", epil);
@@ -18,5 +18,6 @@ int	main()
   set_profile("SIGSEV", epil);
   epil->useProfile("SIGSEV");
 
-  epil->reWrite();
+  epil->wr_setDst("misc/dst_file.c", epil::Block(std::make_pair(1, 8)));
+  epil->wr_setSrc("misc/src_file.c", epil::Block(std::make_pair(4, 6)));
 }
