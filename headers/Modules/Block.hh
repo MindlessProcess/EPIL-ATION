@@ -5,7 +5,7 @@
 // Login   <lucas@epitech.net>
 // 
 // Started on  Mon Feb 24 23:31:33 2014 Lucas Merlette
-// Last update Tue Feb 25 00:45:33 2014 Lucas Merlette
+// Last update Wed Feb 26 15:13:07 2014 Lucas Merlette
 //
 
 #ifndef		EPIL_MODULES_BLOCK_HH_

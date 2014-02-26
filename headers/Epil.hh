@@ -1,12 +1,9 @@
-//
-// Epil.hh for Epil in /home/lucas/Documents/Epitech/Tech3/PFA/epil-ation/headers
-// 
-// Made by Lucas Merlette
-// Login   <lucas@epitech.net>
-// 
-// Started on  Mon Feb 24 23:33:19 2014 Lucas Merlette
-// Last update Tue Feb 25 00:36:54 2014 Lucas Merlette
-//
+/**
+ * @author Lucas Merlette
+ * @created 25/02/2014
+ * @description OUTDATED
+ * This file represents the main class of Epil using the algorithm Min/Max
+ */
 
 #ifndef		EPIL_EPIL_HH_
 # define	EPIL_EPIL_HH_
