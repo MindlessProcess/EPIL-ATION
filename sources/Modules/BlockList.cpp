@@ -5,7 +5,7 @@
 // Login   <lucas@epitech.net>
 // 
 // Started on  Mon Feb 24 23:39:40 2014 Lucas Merlette
-// Last update Sun Mar  2 14:50:55 2014 Lyoma Guillou
+// Last update Sun Mar  2 14:56:29 2014 Lyoma Guillou
 //
 
 #include	"BlockList.hh"
@@ -56,12 +56,12 @@ static bool	dsc_bound(std::pair<int, int> p1, std::pair<int, int> p2)
 
 static std::pair<int, int>	low_bound(std::pair<int, int> p1, std::pair<int, int> p2)
 {
-  return (std::make_pair(std::get<0>(p1), std::get<0>(p2)));
+  return (std::make_pair(std::get<0>(p1), std::get<0>(p2) - 1));
 }
 
 static std::pair<int, int>	high_bound(std::pair<int, int> p1, std::pair<int, int> p2)
 {
-  return (std::make_pair(std::get<1>(p2), std::get<1>(p1)));
+  return (std::make_pair(std::get<1>(p2) + 1, std::get<1>(p1)));
 }
 
 BlockList::BlockList(std::pair<int, int> pair, std::pair<int, int> anti_pair, int anti)
