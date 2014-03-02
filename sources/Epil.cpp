@@ -1,11 +1,11 @@
 //
-// Epil.cpp for Epil in /home/lucas/Documents/Epitech/Tech3/PFA/epil-ation/sources
+// Epil.cpp for Plague Inc. in /home/lucas/Documents/Epitech/Tech3/PFA/epil-ation/sources
 // 
 // Made by Lucas Merlette
 // Login   <lucas@epitech.net>
 // 
-// Started on  Mon Feb 24 23:39:24 2014 Lucas Merlette
-// Last update Tue Feb 25 02:04:07 2014 Lucas Merlette
+// Started on  Wed Feb 26 23:52:04 2014 Lucas Merlette
+// Last update Sun Mar  2 13:34:42 2014 Lucas Merlette
 //
 
 #include	"Epil.hh"
@@ -54,7 +54,7 @@ void	Epil::wr_setDst(std::string const &dst_file, Block const &block)
     }
   else
     {
-      std::cerr << "FAIL" << std::endl;
+      std::cerr << "KO" << std::endl;
       return;
     }
 }
@@ -76,10 +76,26 @@ void	Epil::wr_setSrc(std::string const &src_file, Block const &block)
     }
   else
     {
-      std::cerr << "FAIL" << std::endl;
+      std::cerr << "KO" << std::endl;
       //throw std::exception();
       return;
     }
+}
+
+void	Epil::wr_addDstBlock(Block const &dst_block)
+{
+  (void)dst_block;
+  // this->_dst_block.addBlock(dst_block);
+}
+
+void	Epil::wr_addSrcBlock(Block const &src_block)
+{
+  (void)src_block;
+  // this->_src_block.addBlock(src_block);
+}
+
+void	Epil::wr_run()
+{
 }
 
 inline bool	Epil::_isfile(std::string const &name)
