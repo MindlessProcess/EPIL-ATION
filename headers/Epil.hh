@@ -39,6 +39,9 @@ namespace	epil
     inline bool	_isfile(std::string const&);
 
   private:
+    bool _dst_set;
+    bool _src_set;
+
     std::string _dst_file;
     std::string _src_file;
 

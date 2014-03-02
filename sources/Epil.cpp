@@ -5,7 +5,7 @@
 // Login   <lucas@epitech.net>
 // 
 // Started on  Wed Feb 26 23:52:04 2014 Lucas Merlette
-// Last update Sun Mar  2 14:28:09 2014 Lyoma Guillou
+// Last update Sun Mar  2 14:40:38 2014 Lucas Merlette
 //
 
 #include	"Epil.hh"
@@ -13,6 +13,7 @@
 using namespace	epil;
 
 Epil::Epil()
+  : _dst_set(false), _src_set(false)
 {
 }
 
@@ -39,46 +40,47 @@ void	Epil::useProfile(std::string const &id)
 
 void	Epil::wr_setDst(std::string const &dst_file, BlockList const &block)
 {
-  std::cout << "Loading file <"+dst_file+">...\t";
-  if (this->_isfile(dst_file))
+  if (!this->_dst_set)
     {
-      this->_dst_file	= dst_file;
-      this->_dst_block	= block;
-      std::cout << "OK" << std::endl;
-      std::cout << "Lines to modify :" << std::endl;
-      std::list<std::pair<int,int>> tmp_list = block.getList();
-      for (std::list<std::pair<int,int>>::iterator it = tmp_list.begin(); it != tmp_list.end(); ++it)
+      std::cout << "Loading file <"+dst_file+">...\t";
+      if (this->_isfile(dst_file))
 	{
-	  std::cout << "std::pair<" << (*it).first << "," << (*it).second << ">" << std::endl;
+	  this->_dst_file	= dst_file;
+	  this->_dst_block	= block;
+	  std::cout << "OK" << std::endl;
+	  std::cout << "Lines to modify :" << std::endl;
+	  std::list<std::pair<int,int>> tmp_list = block.getList();
+	  for (std::list<std::pair<int,int>>::iterator it = tmp_list.begin(); it != tmp_list.end(); ++it)
+	    {
+	      std::cout << "std::pair<" << (*it).first << "," << (*it).second << ">" << std::endl;
+	    }
+	  this->_dst_set = !this->_dst_set;
 	}
-    }
-  else
-    {
-      std::cerr << "KO" << std::endl;
-      return;
+      else
+	std::cerr << "KO" << std::endl;
     }
 }
 
 void	Epil::wr_setSrc(std::string const &src_file, BlockList const &block)
 {
-  std::cout << "Loading file <"+src_file+">...\t";
-  if (this->_isfile(src_file))
+  if (!this->_src_set)
     {
-      this->_src_file	= src_file;
-      this->_src_block	= block;
-      std::cout << "OK" << std::endl;
-      std::cout << "Lines for modification :" << std::endl;
-      std::list<std::pair<int,int>> tmp_list = block.getList();
-      for (std::list<std::pair<int,int>>::iterator it = tmp_list.begin(); it != tmp_list.end(); ++it)
+      std::cout << "Loading file <"+src_file+">...\t";
+      if (this->_isfile(src_file))
 	{
-	  std::cout << "std::pair<" << (*it).first << "," << (*it).second << ">" << std::endl;
+	  this->_src_file	= src_file;
+	  this->_src_block	= block;
+	  std::cout << "OK" << std::endl;
+	  std::cout << "Lines for modification :" << std::endl;
+	  std::list<std::pair<int,int>> tmp_list = block.getList();
+	  for (std::list<std::pair<int,int>>::iterator it = tmp_list.begin(); it != tmp_list.end(); ++it)
+	    {
+	      std::cout << "std::pair<" << (*it).first << "," << (*it).second << ">" << std::endl;
+	    }
+	  this->_src_set = !this->_src_set;
 	}
-    }
-  else
-    {
-      std::cerr << "KO" << std::endl;
-      //throw std::exception();
-      return;
+      else
+	std::cerr << "KO" << std::endl;
     }
 }
 
@@ -96,6 +98,10 @@ void	Epil::wr_addSrcBlockList(BlockList const &src_block)
 
 void	Epil::wr_run()
 {
+  // if (!this->_dst_set || !this->_src_set)
+  //   {
+  //     throw WrongBlockSet();
+  //   }
 }
 
 inline bool	Epil::_isfile(std::string const &name)
