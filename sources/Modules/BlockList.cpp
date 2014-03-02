@@ -5,7 +5,7 @@
 // Login   <lucas@epitech.net>
 // 
 // Started on  Mon Feb 24 23:39:40 2014 Lucas Merlette
-// Last update Sun Mar  2 14:28:55 2014 Lyoma Guillou
+// Last update Sun Mar  2 14:50:55 2014 Lyoma Guillou
 //
 
 #include	"BlockList.hh"
@@ -74,10 +74,15 @@ BlockList::BlockList(std::pair<int, int> pair, std::pair<int, int> anti_pair, in
 
       tp = (dsc_pair(pair)) ? swap_pair(pair) : pair;
       ta = (dsc_pair(anti_pair)) ? swap_pair(anti_pair) : anti_pair;
-      if (dsc_bound(tp, ta))
-	this->_list.push_back(low_bound(tp, ta));
-      if (asc_bound(ta, tp))
-	this->_list.push_back(high_bound(tp, ta));
+      if (std::get<0>(ta) < std::get<1>(tp) && std::get<1>(ta) > std::get<0>(tp))
+      	{
+	  if (dsc_bound(tp, ta))
+	    this->_list.push_back(low_bound(tp, ta));
+	  if (asc_bound(tp, ta))
+	    this->_list.push_back(high_bound(tp, ta));
+	}
+      else
+	_list.push_back(tp);
     }
 }
 
