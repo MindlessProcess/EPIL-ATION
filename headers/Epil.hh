@@ -16,7 +16,7 @@
 # include	<string>
 # include	<iostream>
 
-# include	"Block.hh"
+# include	"BlockList.hh"
 # include	"Profile.hh"
 
 namespace	epil
@@ -30,10 +30,10 @@ namespace	epil
     void loadProfile(Profile*);
     void useProfile(std::string const&);
 
-    void wr_setDst(std::string const&, epil::Block const&); //DST_FILE, BLOCK
-    void wr_setSrc(std::string const&, epil::Block const&); //SRC_FILE, BLOCK
-    void wr_addDstBlock(epil::Block const&);
-    void wr_addSrcBlock(epil::Block const&);
+    void wr_setDst(std::string const&, epil::BlockList const&); //DST_FILE, BLOCK
+    void wr_setSrc(std::string const&, epil::BlockList const&); //SRC_FILE, BLOCK
+    void wr_addDstBlockList(epil::BlockList const&);
+    void wr_addSrcBlockList(epil::BlockList const&);
     void wr_run();
 
     inline bool	_isfile(std::string const&);
@@ -42,8 +42,8 @@ namespace	epil
     std::string _dst_file;
     std::string _src_file;
 
-    Block _dst_block;
-    Block _src_block;
+    BlockList _dst_block;
+    BlockList _src_block;
 
     std::list<Profile*> _profileList;
   };
