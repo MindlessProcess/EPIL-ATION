@@ -5,7 +5,7 @@
 // Login   <lucas@epitech.net>
 // 
 // Started on  Mon Feb 24 23:30:29 2014 Lucas Merlette
-// Last update Mon Feb 24 23:31:24 2014 Lucas Merlette
+// Last update Sun Mar  2 15:20:13 2014 Lyoma Guillou
 //
 
 #ifndef		EPIL_MODULES_PARSER_HH_
@@ -16,26 +16,23 @@
 # include	<iostream>
 # include	<fstream>
 
-# include	"Block.hpp"
+# include	"BlockList.hpp"
 
 namespace	epil
 {
   class		Parser
   {
-    // Bloc replacement testing!
-    // Check overlapping blocs
-    // Synthetise blocs
-    // Check for bloc numbers
+  public:
+    Parser()
 
+  private:    
     std::ifstream	_src;
     std::ofstream	_dst;
     Block		_srcBlock;
     Block		_dstBlock;
 
-  public:
     Parser();
     ~Parser();
-
   };
 };
 

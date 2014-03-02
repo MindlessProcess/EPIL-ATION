@@ -5,24 +5,24 @@
 // Login   <lucas@epitech.net>
 // 
 // Started on  Mon Feb 24 23:39:40 2014 Lucas Merlette
-// Last update Sun Mar  2 14:56:29 2014 Lyoma Guillou
+// Last update Sun Mar  2 15:14:11 2014 Lyoma Guillou
 //
 
 #include	"BlockList.hh"
 
 using namespace	epil;
 
-static bool	pos_pair(std::pair<int, int> pair)
+inline bool	pos_pair(std::pair<int, int> pair)
 {
   return (0 <= std::get<0>(pair) && 0 <= std::get<1>(pair));
 }
 
-static bool	dsc_pair(std::pair<int, int> pair)
+inline bool	dsc_pair(std::pair<int, int> pair)
 {
   return (std::get<0>(pair) > std::get<1>(pair));
 }
 
-static std::pair<int, int>	swap_pair(std::pair<int, int> pair)
+inline std::pair<int, int>	swap_pair(std::pair<int, int> pair)
 {
   return (std::make_pair(std::get<1>(pair), std::get<0>(pair)));
 }
@@ -44,22 +44,22 @@ BlockList::BlockList(std::pair<int, int> pair, int anti)
     }
 }
 
-static bool	asc_bound(std::pair<int, int> p1, std::pair<int, int> p2)
+inline bool	asc_bound(std::pair<int, int> p1, std::pair<int, int> p2)
 {
   return (std::get<1>(p2) < std::get<1>(p1));
 }
 
-static bool	dsc_bound(std::pair<int, int> p1, std::pair<int, int> p2)
+inline bool	dsc_bound(std::pair<int, int> p1, std::pair<int, int> p2)
 {
   return (std::get<0>(p2) > std::get<0>(p1));
 }
 
-static std::pair<int, int>	low_bound(std::pair<int, int> p1, std::pair<int, int> p2)
+inline std::pair<int, int>	low_bound(std::pair<int, int> p1, std::pair<int, int> p2)
 {
   return (std::make_pair(std::get<0>(p1), std::get<0>(p2) - 1));
 }
 
-static std::pair<int, int>	high_bound(std::pair<int, int> p1, std::pair<int, int> p2)
+inline std::pair<int, int>	high_bound(std::pair<int, int> p1, std::pair<int, int> p2)
 {
   return (std::make_pair(std::get<1>(p2) + 1, std::get<1>(p1)));
 }
