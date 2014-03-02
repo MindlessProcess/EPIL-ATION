@@ -1,11 +1,11 @@
 //
-// Epil.cpp for Plague Inc. in /home/lucas/Documents/Epitech/Tech3/PFA/epil-ation/sources
+// Epil.cpp for Epil in /home/lucas/Documents/Epitech/Tech3/PFA/epil-ation
 // 
 // Made by Lucas Merlette
 // Login   <lucas@epitech.net>
 // 
-// Started on  Wed Feb 26 23:52:04 2014 Lucas Merlette
-// Last update Sun Mar  2 14:40:38 2014 Lucas Merlette
+// Started on  Sun Mar  2 17:09:36 2014 Lucas Merlette
+// Last update Sun Mar  2 17:59:16 2014 Lucas Merlette
 //
 
 #include	"Epil.hh"
@@ -15,6 +15,16 @@ using namespace	epil;
 Epil::Epil()
   : _dst_set(false), _src_set(false)
 {
+}
+
+void	Epil::setWorkspace(std::string const &workspace_path)
+{
+  (void)workspace_path;
+  if (this->_workspace == NULL)
+    {
+      this->_workspace = new Workspace();
+      this->_workspace->set_wd(get_current_dir_name());
+    }
 }
 
 void	Epil::loadProfile(Profile *profile)
@@ -43,7 +53,7 @@ void	Epil::wr_setDst(std::string const &dst_file, BlockList const &block)
   if (!this->_dst_set)
     {
       std::cout << "Loading file <"+dst_file+">...\t";
-      if (this->_isfile(dst_file))
+      if (shave::FileSystem::isfile(dst_file))
 	{
 	  this->_dst_file	= dst_file;
 	  this->_dst_block	= block;
@@ -66,7 +76,7 @@ void	Epil::wr_setSrc(std::string const &src_file, BlockList const &block)
   if (!this->_src_set)
     {
       std::cout << "Loading file <"+src_file+">...\t";
-      if (this->_isfile(src_file))
+      if (shave::FileSystem::isfile(src_file))
 	{
 	  this->_src_file	= src_file;
 	  this->_src_block	= block;
@@ -98,10 +108,18 @@ void	Epil::wr_addSrcBlockList(BlockList const &src_block)
 
 void	Epil::wr_run()
 {
-  // if (!this->_dst_set || !this->_src_set)
-  //   {
-  //     throw WrongBlockSet();
-  //   }
+  if (!this->_dst_set || !this->_src_set)
+    {
+      std::cerr << "Error: Can't run, dst or src block init not complete" << std::endl;
+    }
+  std::cout << "Writing from file <"+this->_src_file+"> to file <"+this->_dst_file+">...\t";
+  std::cout << this->_writeToFile();
+  std::cout << std::endl;
+}
+
+inline std::string	Epil::_writeToFile()
+{
+  return ("OK");
 }
 
 inline bool	Epil::_isfile(std::string const &name)

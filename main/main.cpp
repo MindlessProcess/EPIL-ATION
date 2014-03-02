@@ -18,6 +18,11 @@ int	main()
   set_profile("SIGSEV", epil);
   epil->useProfile("SIGSEV");
 
-  epil->wr_setDst("misc/dst_file.c", epil::BlockList(std::make_pair(1, 8), std::make_pair(6, 5)));
+  epil->wr_setDst("misc/dst_file.c", epil::BlockList(std::make_pair(1, 8), std::make_pair(2, 7)));
   epil->wr_setSrc("misc/src_file.c", epil::BlockList(std::make_pair(4, 6)));
+
+  epil->wr_run();
+
+  Workspace workspace;
+  workspace.set_wd(".");
 }

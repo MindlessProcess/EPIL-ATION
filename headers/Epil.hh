@@ -18,6 +18,9 @@
 
 # include	"BlockList.hh"
 # include	"Profile.hh"
+# include	"Workspace.hh"
+
+# include	"FileSystem.hpp"
 
 namespace	epil
 {
@@ -27,6 +30,12 @@ namespace	epil
     Epil();
     ~Epil();
 
+    void setWorkspace(std::string const &workspace_path = 0);
+    Workspace *getWorkspace();
+
+    /**
+     * Profile methods
+     */
     void loadProfile(Profile*);
     void useProfile(std::string const&);
 
@@ -36,7 +45,11 @@ namespace	epil
     void wr_addSrcBlockList(epil::BlockList const&);
     void wr_run();
 
-    inline bool	_isfile(std::string const&);
+    /**
+     * Inline methods
+     */
+    inline std::string	_writeToFile();
+    inline bool		_isfile(std::string const&);
 
   private:
     bool _dst_set;
@@ -47,6 +60,8 @@ namespace	epil
 
     BlockList _dst_block;
     BlockList _src_block;
+
+    Workspace *_workspace;
 
     std::list<Profile*> _profileList;
   };
