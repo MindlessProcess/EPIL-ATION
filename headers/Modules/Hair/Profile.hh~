@@ -25,7 +25,13 @@ namespace	epil
 
     void	setId(std::string const&);
     bool	isComplete();
-    // void  setAction(AType);
+    void  setAction(AType);
+
+    template <typename ID1, ID2>
+    void  changeActionOrder(ID1, ID2);
+    void  changeActionOrder(std::pair<ID1, ID2> const&);
+
+    void  revertActionOrder();
 
     std::string const	&getId();
     // std::list<Action*>  &getActionList();

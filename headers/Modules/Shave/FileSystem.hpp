@@ -15,23 +15,45 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 
-namespace shave
+namespace epil
 {
-  struct FileSystem
+  namespace shave
   {
-    static inline bool isfile(std::string const &name)
+    struct FileSystem
     {
-      struct stat buffer;
-      return (stat(name.c_str(), &buffer) == 0);
-    }
+      static inline bool isfile(std::string const &name)
+      {
+        return (access(name.c_str(), F_OK) == 0);
+      }
 
-    static inline bool isdir(std::string const &name)
-    {
-      struct stat buffer;
-      return ((stat(name.c_str(), &buffer) == 0)
-	      && (((buffer.st_mode) & S_IFMT) == S_IFDIR));
-    }
+      static inline bool isdir(std::string const &name)
+      {
+        struct stat buffer;
+        return ((stat(name.c_str(), &buffer) == 0)
+          && (((buffer.st_mode) & S_IFMT) == S_IFDIR));
+      }
+
+      static inline bool isreadable(std::string const &name)
+      {
+        return (access(name.c_str(), R_OK) == 0);
+      }
+
+      static inline bool iswritable(std::string const &name)
+      {
+        return (access(name.c_str(), W_OK) == 0);
+      }
+
+      static inline bool isexecutable(std::string const &name)
+      {
+        return (access(name.c_str(), X_OK) == 0);
+      }
+
+      static inline bool isusable(std::string const &name)
+      {
+        return (access(name.c_str(), R_OK | W_OK | X_OK) == 0);
+      }
+    };
   };
 };
 
-#endif	/* !EPIL_MODULES_SHAVE_FILESYSTEM_HPP_ */
+#endif /* !EPIL_MODULES_SHAVE_FILESYSTEM_HPP_ */

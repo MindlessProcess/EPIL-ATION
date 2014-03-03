@@ -8,7 +8,7 @@ Workspace::Workspace()
 
 void Workspace::set_wd(std::string const &wd)
 {
-  if (!shave::FileSystem::isdir(realpath(wd.c_str(), NULL)))
+  if (!epil::shave::FileSystem::isdir(realpath(wd.c_str(), NULL)))
     {
       std::cerr << "Error <"+wd+">: No such directory" << std::endl;
       return;

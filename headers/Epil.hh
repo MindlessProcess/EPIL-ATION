@@ -16,9 +16,10 @@
 # include	<string>
 # include	<iostream>
 
-# include	"BlockList.hh"
+ # include	"BlockList.hh"
 # include	"Profile.hh"
 # include	"Workspace.hh"
+# include	"Console.hh"
 
 # include	"FileSystem.hpp"
 

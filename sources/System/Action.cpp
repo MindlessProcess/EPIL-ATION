@@ -14,3 +14,19 @@
 
 using namespace epil;
 
+// template <typename T>
+// Action<T>::Action(T id, AType type)
+//   : _id(id), _type(type)
+// {
+// }
+
+template <typename T>
+void Action<T>::setId(T id)
+{
+  this->_id = id;
+}
+template <typename T>
+T const Action<T>::getId() const
+{
+  return (this->_id);
+}

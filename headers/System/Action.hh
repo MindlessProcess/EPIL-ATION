@@ -16,46 +16,64 @@
 # include	<iostream>
 # include	<fstream>
 
-# include	"BlockList.hpp"
+// # include	"BlockList.hpp"
 
 namespace	epil
 {
   enum		AType
-    {
-      NULL,
-      MODIFY,
-      COMPILE,
-      EXEC
-    };
-
-  class		Action
   {
-  public:
-    Action(AType type);
-
-  private:
-    AType	_type;
-    Action	*_action;
-
-    Action();
-    ~Action();
+    NIL,
+    MODIFY,
+    COMPILE,
+    EXEC
   };
 
-  class		Write : public Action
+  class IAction
   {
   public:
-    Write(std::string src, std::string dst, BlockList srcBlock, BlockList dstBlock);
+    virtual ~IAction() {}
+  };
+
+  template <typename T>
+  class		Action : public IAction
+  {
+  public:
+    Action(T id, AType type)
+    : _id(id), _type(type)
+    {
+    }
+    ~Action() {}
+
+    void setId(T);
+    T const getId() const;
+
+  private:
+    T _id;
+    AType _type;
+    Action  *_action;
+
+
+    Action();
+    // ~Action();
+  };
+
+  template <typename T>
+  class		Write : public Action<T>
+  {
+  public:
+    Write(std::string src, std::string dst/*, BlockList srcBlock, BlockList dstBlock*/);
   private:
     std::ifstream	_src;
     std::ofstream	_dst;
-    BlockList		_srcBlock;
-    BlockList		_dstBlock;
+    // BlockList		_srcBlock;
+    // BlockList		_dstBlock;
 
     Write();
     ~Write();
   };
 
-  class		Compile : public Action
+  template <typename T>
+  class		Compile : public Action<T>
   {
   public:
   private:
@@ -65,7 +83,8 @@ namespace	epil
     ~Compile();
   };
 
-  class		Exec : public Action
+  template <typename T>
+  class		Exec : public Action<T>
   {
   public:
   private:

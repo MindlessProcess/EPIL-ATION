@@ -1,0 +1,25 @@
+How to use a Profile :
+
+void  my_func()
+{
+  epil::Profile my_profile = new epil::Profile();
+  profile->setId("my_first_profile");
+  profile->setAction(AT_WRITE)
+  .wr_setDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)))
+  .wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
+  profile->setActionDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)));
+  profile->setActionSrc();
+  profile->setAction(AT_WRITE);
+  profile->setAction(AT_WRITE);
+}
+
+void  set_profile()
+{
+  epil::Epil *epil = new epil::Epil();
+  epil::Profile *my_profile= new epil::Profile();
+  my_profile->setId("my_first_profile");
+  my_profile->setAction(AT_WRITE)
+    .wr_setDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)))
+    .wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
+  epil->loadProfile(my_profile);
+}
