@@ -1,18 +1,23 @@
 #include	"Epil.hh"
+#include  "Action.hh"
 
 void	set_profile(std::string const &id, epil::Epil *epil)
 {
   epil::Profile	*profile= new epil::Profile();
   profile->setId(id);
-  profile->setAction("my_first_profile", epil::MODIFY);
+  profile->setAction(epil::MODIFY, "my_first_profile");
      // .wr_setDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)))
      // .wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
-  profile->setAction(100394, epil::MODIFY);
+  profile->setAction(epil::MODIFY, "100394");
 
-  for (std::list<>; i < count; ++i)
-  {
-    /* code */
-  }
+  std::cout << "ID = " << profile->getActionList().back()->getId() << std::endl;
+
+  // std::cout << "BEGIN: " << (*(profile->getActionList().begin()))->name << std::endl;
+  // for (std::list<epil::IAction*>::iterator it = profile->getActionList().begin(); it != profile->getActionList().end(); ++it)
+  // {
+  //   std::cout << "HH" << std::endl;
+  //   std::cout << "action: <" << (*it)->name << ">" << std::endl;
+  // }
 
   epil->loadProfile(profile);
 }

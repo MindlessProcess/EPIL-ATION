@@ -28,37 +28,25 @@ namespace	epil
     EXEC
   };
 
-  class IAction
+  class		Action
   {
   public:
-    virtual ~IAction() {}
-  };
+    Action(AType type, std::string const &id);
+    ~Action();
 
-  template <typename T>
-  class		Action : public IAction
-  {
-  public:
-    Action(T id, AType type)
-    : _id(id), _type(type)
-    {
-    }
-    ~Action() {}
-
-    void setId(T);
-    T const getId() const;
+    void setId(std::string const&);
+    std::string const &getId() const;
 
   private:
-    T _id;
     AType _type;
-    Action  *_action;
+    std::string _id;
+    // Action  *_action;
 
 
     Action();
-    // ~Action();
   };
 
-  template <typename T>
-  class		Write : public Action<T>
+  class		Write : public Action
   {
   public:
     Write(std::string src, std::string dst/*, BlockList srcBlock, BlockList dstBlock*/);
@@ -72,8 +60,7 @@ namespace	epil
     ~Write();
   };
 
-  template <typename T>
-  class		Compile : public Action<T>
+  class		Compile : public Action
   {
   public:
   private:
@@ -83,8 +70,7 @@ namespace	epil
     ~Compile();
   };
 
-  template <typename T>
-  class		Exec : public Action<T>
+  class		Exec : public Action
   {
   public:
   private:

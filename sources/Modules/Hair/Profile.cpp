@@ -26,11 +26,15 @@ void  Profile::setId(std::string const &id)
   this->_id = id;
 }
 
-// template <typename T>
-// void  Profile::setAction(T id, AType actionType)
-// {
-//   this->_actionList.push_back(new Action<T>(id, actionType));
-// }
+void  Profile::setAction(AType actionType, std::string const &id)
+{
+  this->_actionList.push_back(new Action(actionType, id));
+}
+
+std::list<Action*>  &Profile::getActionList()
+{
+  return (this->_actionList);
+}
 
 std::string const   &Profile::getId()
 {
@@ -39,8 +43,7 @@ std::string const   &Profile::getId()
   throw new std::exception();
 }
 
-template <typename ID1, typename ID2>
-void  Profile::changeActionOrder(ID1 first_id, ID2 second_id)
+void  Profile::changeActionOrder(std::string const&, std::string const&)
 {
   // Action<ID1> first_action;
   // Action<ID2> second_action;
@@ -57,8 +60,7 @@ void  Profile::changeActionOrder(ID1 first_id, ID2 second_id)
   //   }
   // }
 }
-template <typename ID1, typename ID2>
-void  Profile::changeActionOrder(std::pair<ID1, ID2> const &pair)
+void  Profile::changeActionOrder(std::pair<std::string, std::string> const &pair)
 {
   (void)pair;
 }

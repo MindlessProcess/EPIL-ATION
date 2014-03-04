@@ -15,7 +15,7 @@
 # include	<string>
 # include <list>
 
-# include <boost/variant.hpp>
+// # include <boost/variant.hpp>
 
 # include "Action.hh"
 
@@ -25,42 +25,30 @@ namespace	epil
   {
   public:
     Profile();
-    Profile(std::string const&);
+    Profile(std::string const &id);
     ~Profile();
 
-    void	setId(std::string const&);
-    bool	isComplete();
+    void	setId(std::string const &id);
+    std::string const	&getId();
 
-    template <typename T>
-    void  setAction(T id, AType actionType)
-    {
-      // std::list<int> *my_list = new std::list<int>();
-      // (void)my_list;
-      // Action<T> *new_action   = new Action<T>(id, actionType);
-      // (void)new_action;
-      // (void)id;
-      // (void)actionType;
-      this->_actionList.push_back(new Action<T>(id, actionType));
-    }
+    bool  isComplete();
+
+    void  setAction(AType actionType, std::string const &id);
+    std::list<Action*>  &getActionList();
 
     /**
      * Action order functions
      */
-    template <typename ID1, typename ID2>
-    void  changeActionOrder(ID1, ID2);
-    template <typename ID1, typename ID2>
-    void  changeActionOrder(std::pair<ID1, ID2> const&);
+    void  changeActionOrder(std::string const&, std::string const&);
+    void  changeActionOrder(std::pair<std::string, std::string> const&);
 
     void  revertActionOrder();
-
-    std::string const	&getId();
-    // std::list<Action*>  &getActionList();
   private:
     std::string	_id;
 
     // Defining VT (Variant Type) as a template type possibly being one of these types :
     // typedef boost::variant<int, std::string const&> VT;
-    std::list<IAction*>	_actionList;
+    std::list<Action*>	_actionList;
   };
 };
 

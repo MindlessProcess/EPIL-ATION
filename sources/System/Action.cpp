@@ -10,23 +10,21 @@
 
 #include "Action.hh"
 
-#include <iostream>
-
 using namespace epil;
 
-// template <typename T>
-// Action<T>::Action(T id, AType type)
-//   : _id(id), _type(type)
-// {
-// }
+Action::Action(AType type, std::string const &id)
+  : _type(type), _id(id)
+{
+}
+Action::~Action()
+{
+}
 
-template <typename T>
-void Action<T>::setId(T id)
+void  Action::setId(std::string const &id)
 {
   this->_id = id;
 }
-template <typename T>
-T const Action<T>::getId() const
+std::string const &Action::getId() const
 {
   return (this->_id);
 }
