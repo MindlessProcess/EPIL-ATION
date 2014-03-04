@@ -5,7 +5,7 @@
 // Login   <guillo_e@epitech.net>
 // 
 // Started on  Tue Mar  4 14:12:58 2014 Lyoma Guillou
-// Last update Tue Mar  4 15:41:44 2014 Lyoma Guillou
+// Last update Tue Mar  4 17:10:04 2014 Lyoma Guillou
 //
 
 #ifndef		EPIL_SYSTEM_ACTIONWRITE_HH_
@@ -28,7 +28,7 @@ namespace	epil
 
     // Maybe an empty constructor limits the unpredictable results
     // And it forces the user to setSrc and setDst
-    ActionWrite();
+    ActionWrite(std::string const &id);
 
     // ActionWrite(std::string src, std::string dst/*, BlockList srcBlock, BlockList dstBlock*/);
 
