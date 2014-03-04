@@ -5,7 +5,7 @@
 // Login   <lucas@epitech.net>
 // 
 // Started on  Mon Feb 24 23:33:51 2014 Lucas Merlette
-// Last update Tue Mar  4 15:14:17 2014 Lyoma Guillou
+// Last update Tue Mar  4 15:38:15 2014 Lyoma Guillou
 //
 
 #ifndef		EPIL_SYSTEM_ACTION_HH_
@@ -15,8 +15,6 @@
 # include	<utility>
 # include	<iostream>
 # include	<fstream>
-
-// # include	"BlockList.hpp"
 
 namespace	epil
 {
@@ -38,11 +36,11 @@ namespace	epil
 
     virtual void	apply() = 0;
 
-  private:
+  protected:
     AType _type;
     std::string _id;
-    // Action  *_action;
 
+  private:
     Action();
     ~Action();
   };
