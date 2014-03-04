@@ -18,6 +18,7 @@
 // # include <boost/variant.hpp>
 
 # include "Action.hh"
+# include "ActionWrite.hh"
 
 namespace	epil
 {
@@ -33,7 +34,14 @@ namespace	epil
 
     bool  isComplete();
 
-    void  setAction(AType actionType, std::string const &id);
+    Profile &setAction(Action*);
+    template <typename T>
+    Action *setAction(std::string const &id)
+    {
+      this->_actionList.push_back(new T(id));
+      return (this->_actionList.back());
+      // return (dynamic_cast<ActionWrite*>(this->_actionList.back()));
+    }
     std::list<Action*>  &getActionList();
 
     /**

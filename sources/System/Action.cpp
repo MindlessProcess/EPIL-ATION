@@ -12,8 +12,8 @@
 
 using namespace epil;
 
-Action::Action(AType type, std::string const &id)
-  : _type(type), _id(id)
+Action::Action(std::string const &id)
+  : _id(id)
 {
 }
 Action::~Action()

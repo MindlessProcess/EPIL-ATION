@@ -26,13 +26,20 @@ namespace	epil
   class		Action
   {
   public:
-    Action(AType type, std::string const &id);
-
-    void		setId(std::string const &);
-    std::string const &	getId() const;
-
-    // virtual void	apply() = 0;
+    Action(std::string const &id);
     ~Action();
+
+    void    setId(std::string const &);
+    std::string const & getId() const;
+
+    // virtual void apply() = 0;
+
+    /*
+    * ActionWrite
+    */
+    // void wr_setDst(std::string const&, epil::BlockList*); //DST_FILE, BLOCK
+    // void wr_setSrc(std::string const&, epil::BlockList*); //SRC_FILE, BLOCK
+
 
   private:
     AType _type;

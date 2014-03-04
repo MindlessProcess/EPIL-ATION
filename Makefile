@@ -5,7 +5,7 @@
 ## Login   <lucas@epitech.net>
 ## 
 ## Started on  Mon Feb 24 23:44:12 2014 Lucas Merlette
-## Last update Mon Mar  3 21:57:52 2014 Lucas Merlette
+## Last update Tue Mar  4 17:51:11 2014 Lucas Merlette
 ##
 
 NAME	= epil
@@ -19,7 +19,8 @@ SRCS	= $(MAIN_P)main.cpp	\
 	$(SRCS_P)Modules/BlockList.cpp \
 	$(SRCS_P)Modules/Workspace.cpp \
 	$(SRCS_P)Modules/Hair/Profile.cpp \
-	$(SRCS_P)System/Action.cpp
+	$(SRCS_P)System/Action.cpp \
+	$(SRCS_P)System/ActionWrite.cpp
 INC_P	= -Iheaders/
 INC	= $(INC_P) \
 	$(INC_P)Modules \

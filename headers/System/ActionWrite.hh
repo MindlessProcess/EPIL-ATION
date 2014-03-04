@@ -19,6 +19,7 @@
 // Needed for setSrc() and setDst()
 //
 # include	"BlockList.hh"
+# include   "FileSystem.hpp"
 
 namespace	epil
 {
@@ -29,26 +30,38 @@ namespace	epil
     // Maybe an empty constructor limits the unpredictable results
     // And it forces the user to setSrc and setDst
     ActionWrite(std::string const &id);
+    ~ActionWrite();
 
     // ActionWrite(std::string src, std::string dst/*, BlockList srcBlock, BlockList dstBlock*/);
 
     // User sets the needed modifications
-    void	setSrc(std::string const &src, BlockList srcBlock);
-    void	setDst(std::string const &dst, BlockList dstBlock);
+    // void setSrc(std::string const &src, BlockList srcBlock);
+    // void setDst(std::string const &dst, BlockList dstBlock);
+
+    ActionWrite &wr_setDst(std::string const&, epil::BlockList*); //DST_FILE, BLOCK
+    ActionWrite &wr_setSrc(std::string const&, epil::BlockList*); //SRC_FILE, BLOCK
+    // void wr_addDstBlockList(epil::BlockList const&);
+    // void wr_addSrcBlockList(epil::BlockList const&);
+    // void wr_run();
 
     // ? getSrc() const;
     // ? getDst() const;
 
     // apply the modifications
-    void	apply();
+    void  apply();
 
   private:
-    std::ifstream	_src;
-    std::ofstream	_dst;
-    // BlockList		_srcBlock;
-    // BlockList		_dstBlock;
+    bool _dst_set;
+    bool _src_set;
 
-    ~ActionWrite();
+    std::string _dst_file;
+    std::string _src_file;
+
+    BlockList   *_dst_block;
+    BlockList   *_src_block;
+    // std::ifstream  _src;
+    // std::ofstream  _dst;
+
   };
 };
 

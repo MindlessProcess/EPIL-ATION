@@ -26,9 +26,11 @@ void  Profile::setId(std::string const &id)
   this->_id = id;
 }
 
-void  Profile::setAction(AType actionType, std::string const &id)
+Profile &Profile::setAction(Action *new_action)
 {
-  this->_actionList.push_back(new Action(actionType, id));
+  this->_actionList.push_back(new_action);
+
+  return (*this);
 }
 
 std::list<Action*>  &Profile::getActionList()
@@ -45,8 +47,8 @@ std::string const   &Profile::getId()
 
 void  Profile::changeActionOrder(std::string const &first_id, std::string const &second_id)
 {
-  Action *first_action;
-  Action *second_action;
+  Action *first_action = NULL;
+  Action *second_action = NULL;
 
   for (std::list<Action*>::iterator it = this->_actionList.begin(); it != _actionList.end(); ++it)
   {
@@ -80,13 +82,6 @@ void  Profile::changeActionOrder(std::pair<std::string, std::string> const &pair
 void  Profile::revertActionOrder()
 {
 }
-
-// std::list<Action*>  &Profile::getActionList()
-// {
-//   if (this->_actionList)
-//     return (this->_actionList);
-//   throw new std::exception();
-// }
 
 bool	Profile::isComplete()
 {

@@ -38,6 +38,7 @@ void	Epil::loadProfile(Profile *profile)
 
 void	Epil::useProfile(std::string const &id)
 {
+  std::cout << "========In Epil::useProfile()============" << std::endl;
   std::cout << "Profile needed = " << id << std::endl;
   for (std::list<Profile*>::iterator it = this->_profileList.begin();
     it != this->_profileList.end(); ++it)
@@ -48,6 +49,7 @@ void	Epil::useProfile(std::string const &id)
       std::cout << "Profile found = " << (*it)->getId() << std::endl;
     }
   }
+  std::cout << "========Out of Epil::useProfile()========" << std::endl;
 }
 
 void	Epil::wr_setDst(std::string const &dst_file, BlockList const &block)
