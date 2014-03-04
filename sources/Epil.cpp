@@ -38,12 +38,14 @@ void	Epil::loadProfile(Profile *profile)
 
 void	Epil::useProfile(std::string const &id)
 {
+  std::cout << "Profile needed = " << id << std::endl;
   for (std::list<Profile*>::iterator it = this->_profileList.begin();
     it != this->_profileList.end(); ++it)
   {
-    if (id.compare((*it)->getId()))
+    std::cout << "Profile ID = " << (*it)->getId() << std::endl;
+    if (!id.compare((*it)->getId()))
     {
-      std::cout << "Profile found" << std::endl;
+      std::cout << "Profile found = " << (*it)->getId() << std::endl;
     }
   }
 }

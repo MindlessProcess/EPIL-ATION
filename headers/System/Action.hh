@@ -11,6 +11,8 @@
 #ifndef		EPIL_SYSTEM_ACTION_HH_
 # define	EPIL_SYSTEM_ACTION_HH_
 
+#include  <iostream>
+
 namespace	epil
 {
   enum		AType
@@ -29,14 +31,14 @@ namespace	epil
     void		setId(std::string const &);
     std::string const &	getId() const;
 
-    virtual void	apply() = 0;
+    // virtual void	apply() = 0;
+    ~Action();
 
   private:
     AType _type;
     std::string _id;
 
     Action();
-    ~Action();
   };
 };
 

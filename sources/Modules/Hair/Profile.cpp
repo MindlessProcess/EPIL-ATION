@@ -28,7 +28,7 @@ void  Profile::setId(std::string const &id)
 
 void  Profile::setAction(AType actionType, std::string const &id)
 {
-  this->_actionList.push_back(new ActionWrite(actionType, id));
+  this->_actionList.push_back(new Action(actionType, id));
 }
 
 std::list<Action*>  &Profile::getActionList()
