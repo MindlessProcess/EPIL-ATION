@@ -5,16 +5,11 @@
 // Login   <lucas@epitech.net>
 // 
 // Started on  Mon Feb 24 23:33:51 2014 Lucas Merlette
-// Last update Tue Mar  4 15:38:15 2014 Lyoma Guillou
+// Last update Tue Mar  4 15:41:43 2014 Lyoma Guillou
 //
 
 #ifndef		EPIL_SYSTEM_ACTION_HH_
 # define	EPIL_SYSTEM_ACTION_HH_
-
-# include	<list>
-# include	<utility>
-# include	<iostream>
-# include	<fstream>
 
 namespace	epil
 {

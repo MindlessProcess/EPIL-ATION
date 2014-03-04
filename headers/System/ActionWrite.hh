@@ -5,17 +5,16 @@
 // Login   <guillo_e@epitech.net>
 // 
 // Started on  Tue Mar  4 14:12:58 2014 Lyoma Guillou
-// Last update Tue Mar  4 15:38:15 2014 Lyoma Guillou
+// Last update Tue Mar  4 15:41:44 2014 Lyoma Guillou
 //
 
 #ifndef		EPIL_SYSTEM_ACTIONWRITE_HH_
 # define	EPIL_SYSTEM_ACTIONWRITE_HH_
 
-# include	<list>
-# include	<utility>
 # include	<iostream>
 # include	<fstream>
 
+# include	"Action.hh"
 //
 // Needed for setSrc() and setDst()
 //
