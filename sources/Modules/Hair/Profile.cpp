@@ -28,7 +28,7 @@ void  Profile::setId(std::string const &id)
 
 void  Profile::setAction(AType actionType, std::string const &id)
 {
-  this->_actionList.push_back(new Action(actionType, id));
+  this->_actionList.push_back(new ActionWrite(actionType, id));
 }
 
 std::list<Action*>  &Profile::getActionList()
@@ -43,22 +43,34 @@ std::string const   &Profile::getId()
   throw new std::exception();
 }
 
-void  Profile::changeActionOrder(std::string const&, std::string const&)
+void  Profile::changeActionOrder(std::string const &first_id, std::string const &second_id)
 {
-  // Action<ID1> first_action;
-  // Action<ID2> second_action;
+  Action *first_action;
+  Action *second_action;
 
-  // for (std::list<Action<VT>*>::iterator it = this->_actionList.begin(); it != _actionList.end(); ++it)
-  // {
-  //   if ((*it)->getId() == first_id)
-  //   {
-  //     first_action = *it;
-  //   }
-  //   if ((*it)->getId() == second_id)
-  //   {
-  //     second_action = *it;
-  //   }
-  // }
+  for (std::list<Action*>::iterator it = this->_actionList.begin(); it != _actionList.end(); ++it)
+  {
+    if ((*it)->getId() == first_id)
+    {
+      first_action = *it;
+      if (second_action == NULL)
+        break;
+      else
+        continue;
+    }
+    if ((*it)->getId() == second_id)
+    {
+      second_action = *it;
+      if (first_action == NULL)
+        break;
+      else
+        continue;
+    }
+  }
+  if (first_action != NULL && second_action != NULL)
+  {
+    std::iter_swap(first_action, second_action);
+  }
 }
 void  Profile::changeActionOrder(std::pair<std::string, std::string> const &pair)
 {

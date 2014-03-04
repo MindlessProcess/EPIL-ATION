@@ -10,14 +10,19 @@ void	set_profile(std::string const &id, epil::Epil *epil)
      // .wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
   profile->setAction(epil::MODIFY, "100394");
 
-  std::cout << "ID = " << profile->getActionList().back()->getId() << std::endl;
-
   // std::cout << "BEGIN: " << (*(profile->getActionList().begin()))->name << std::endl;
-  // for (std::list<epil::IAction*>::iterator it = profile->getActionList().begin(); it != profile->getActionList().end(); ++it)
-  // {
-  //   std::cout << "HH" << std::endl;
-  //   std::cout << "action: <" << (*it)->name << ">" << std::endl;
-  // }
+  // std::cout << "Printing actions" << std::endl;
+  for (std::list<epil::Action*>::iterator it = profile->getActionList().begin(); it != profile->getActionList().end(); ++it)
+  {
+    std::cout << "Action = <" << (*it)->getId() << ">" << std::endl;
+  }
+  profile->changeActionOrder("my_first_profile", "100394");
+  epil::hair::Console::log("Action order changed");
+  for (std::list<epil::Action*>::iterator it = profile->getActionList().begin(); it != profile->getActionList().end(); ++it)
+  {
+    std::cout << "Action = <" << (*it)->getId() << ">" << std::endl;
+  }
+  // std::cout << "End of printing actions" << std::endl;
 
   epil->loadProfile(profile);
 }
@@ -28,18 +33,18 @@ int	main()
   {
     epil::Epil  *epil = new epil::Epil();
     set_profile("SIGSEV", epil);
-    set_profile("SIGERR", epil);
-    set_profile("SIGHANDLER", epil);
-    set_profile("SIGSEV", epil);
-    set_profile("SIGFALSE", epil);
-    set_profile("SIGSEV", epil);
+    // set_profile("SIGERR", epil);
+    // set_profile("SIGHANDLER", epil);
+    // set_profile("SIGSEV", epil);
+    // set_profile("SIGFALSE", epil);
+    // set_profile("SIGSEV", epil);
     epil->useProfile("SIGSEV");
   }
 
   // Unit tests on wr_functions
   {
     epil::Epil  *epil = new epil::Epil();
-    epil->wr_setDst("misc/dst_file.c", epil::BlockList(std::make_pair(1, 8), std::make_pair(2, 7)));
+    epil->("misc/dst_file.c", epil::BlockList(std::make_pair(1, 8), std::make_pair(2, 7)));
     epil->wr_setSrc("misc/src_file.c", epil::BlockList(std::make_pair(4, 6)));
 
     epil->wr_run();
@@ -52,7 +57,7 @@ int	main()
 
   // Unit tests on Console.hh
   {
-    epil::hair::Console::log("HELLO");
+    epil::hair::Console::log("Console.log test");
   }
 
   // Unit tests on FileSystem.hpp
