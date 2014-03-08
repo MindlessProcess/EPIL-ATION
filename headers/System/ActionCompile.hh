@@ -5,7 +5,7 @@
 // Login   <guillo_e@epitech.net>
 // 
 // Started on  Tue Mar  4 15:10:20 2014 Lyoma Guillou
-// Last update Sat Mar  8 15:36:38 2014 Lyoma Guillou
+// Last update Sat Mar  8 18:46:51 2014 Lyoma Guillou
 //
 
 #ifndef		EPIL_SYSTEM_ACTIONCOMPILE_HH_
@@ -29,6 +29,8 @@ namespace	epil
     std::string	_cmd;
 
     ActionCompile();
+
+    void	_format_path();
   };
 };
 

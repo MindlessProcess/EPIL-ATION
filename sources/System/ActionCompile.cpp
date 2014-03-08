@@ -5,14 +5,16 @@
 // Login   <guillo_e@epitech.net>
 // 
 // Started on  Sat Mar  8 14:39:47 2014 Lyoma Guillou
-// Last update Sat Mar  8 17:25:27 2014 Lyoma Guillou
+// Last update Sat Mar  8 18:51:56 2014 Lyoma Guillou
 //
 
 #include	<unistd.h>
 #include	<stdlib.h>
+#include	<string.h>
 #include	<sys/wait.h>
 #include	<sys/types.h>
 
+#include	<string>
 #include	<iostream>
 
 #include	"Action.hh"
@@ -31,9 +33,6 @@ ActionCompile::ActionCompile(std::string const &id, std::string const &cmd, std:
       this->_cmd = cmd + " -c " + obj;
       if (!name.empty())
 	this->_cmd = this->_cmd + " -o " + name;
-      // Warn the user?
-      // else
-      // 	std::cout << "Warning: outfile will be 'a.out'" << std::endl;
       if (!flag.empty())
 	this->_cmd = this->_cmd + " " + flag;
     }
@@ -54,34 +53,37 @@ ActionCompile::~ActionCompile()
 {
 }
 
+void		ActionCompile::_format_path()
+{
+  char		*path;
+  unsigned	pos;
+
+  pos = this->_path.find("~");
+  this->_path = std::string(strcat(getenv("HOME"), this->_path.substr(pos + 1).c_str()));
+}
+
 void		ActionCompile::apply()
 {
-  // can fork here
   pid_t		pid;
 
-  if (0 > (pid = fork()))
+  pid = fork();
+  if (0 > pid)
     std::cerr << "Fork error" << std::endl;
   if (0 == pid)
     {
+      if (this->_path[0] == '~')
+	this->_format_path();
       if (0 != this->_path.compare("."))
 	{
-	  std::cout << _path << std::endl;
-	  if (0 > access(_path.c_str(), F_OK))
+	  if (0 > access(_path.c_str(), F_OK) && 0 > chdir(_path.c_str()))
 	    {
-	      std::cerr << "Path is non existant" << std::endl;
-	      return;
-	    }
-	  if (0 > chdir(_path.c_str()))
-	    {
-	      std::cerr << "Chdir error" << std::endl;
-	      return;
+	      std::cerr << "Error: Path is probably non existant" << std::endl;
+	      exit(EXIT_FAILURE);
 	    }
 	  system(_cmd.c_str());
+	  exit(EXIT_SUCCESS);
 	}
     }
   else
-    {
-      wait(0);
-      return;
-    }
+    wait(0);
 }
