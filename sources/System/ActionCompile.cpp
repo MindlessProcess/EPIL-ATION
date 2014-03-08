@@ -5,8 +5,15 @@
 // Login   <guillo_e@epitech.net>
 // 
 // Started on  Sat Mar  8 14:39:47 2014 Lyoma Guillou
-// Last update Sat Mar  8 15:36:39 2014 Lyoma Guillou
+// Last update Sat Mar  8 17:25:27 2014 Lyoma Guillou
 //
+
+#include	<unistd.h>
+#include	<stdlib.h>
+#include	<sys/wait.h>
+#include	<sys/types.h>
+
+#include	<iostream>
 
 #include	"Action.hh"
 #include	"ActionCompile.hh"
@@ -24,15 +31,18 @@ ActionCompile::ActionCompile(std::string const &id, std::string const &cmd, std:
       this->_cmd = cmd + " -c " + obj;
       if (!name.empty())
 	this->_cmd = this->_cmd + " -o " + name;
+      // Warn the user?
+      // else
+      // 	std::cout << "Warning: outfile will be 'a.out'" << std::endl;
       if (!flag.empty())
 	this->_cmd = this->_cmd + " " + flag;
     }
   else
     {
       if (cmd.empty())
-	std::err << "Error: No compiler set" << std::endl;
+	std::cerr << "Error: No compiler set" << std::endl;
       if (obj.empty())
-	std::err << "Error: No source files set" << std::endl;
+	std::cerr << "Error: No source files set" << std::endl;
     }
 }
 
@@ -46,14 +56,32 @@ ActionCompile::~ActionCompile()
 
 void		ActionCompile::apply()
 {
-  
-  // check path
-  // fork and chdir to path
-  // compile in path
-  // copy binary if not in same path?
+  // can fork here
+  pid_t		pid;
 
-  // might fork here for directory purpose
-  // maybe?
-  // perhaps...
-  // just in case
+  if (0 > (pid = fork()))
+    std::cerr << "Fork error" << std::endl;
+  if (0 == pid)
+    {
+      if (0 != this->_path.compare("."))
+	{
+	  std::cout << _path << std::endl;
+	  if (0 > access(_path.c_str(), F_OK))
+	    {
+	      std::cerr << "Path is non existant" << std::endl;
+	      return;
+	    }
+	  if (0 > chdir(_path.c_str()))
+	    {
+	      std::cerr << "Chdir error" << std::endl;
+	      return;
+	    }
+	  system(_cmd.c_str());
+	}
+    }
+  else
+    {
+      wait(0);
+      return;
+    }
 }
