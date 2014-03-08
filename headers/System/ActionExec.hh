@@ -1,11 +1,11 @@
 //
-// ActionExec.hh for Epl in /home/seiza/Documents/Git/epil-ation/headers/System
+// ActionExec.hh for Epil in /home/seiza/Documents/Git/epil-ation/headers/System
 // 
 // Made by Lyoma Guillou
 // Login   <guillo_e@epitech.net>
 // 
 // Started on  Tue Mar  4 15:09:11 2014 Lyoma Guillou
-// Last update Tue Mar  4 16:12:47 2014 Lyoma Guillou
+// Last update Sat Mar  8 14:19:21 2014 Lyoma Guillou
 //
 
 #ifndef		EPIL_SYSTEM_ACTIONEXEC_HH_
@@ -19,16 +19,16 @@ namespace	epil
   {
   public:
     ActionExec(std::string const &id, std::string const &cmd, std::string const &opt = "");
+    ~ActionExec();
 
     // [fork]ing and [setpgid]ing
-    void		apply();
+    virtual void	apply();
 
   private:
     std::string		_cmd;
-    std::string		_opt;
+    char		**_arg;
 
     ActionExec();
-    ~ActionExec();
   };
 
 };
