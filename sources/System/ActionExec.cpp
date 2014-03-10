@@ -5,7 +5,7 @@
 // Login   <guillo_e@epitech.net>
 // 
 // Started on  Tue Mar  4 15:40:08 2014 Lyoma Guillou
-// Last update Sat Mar  8 14:23:07 2014 Lyoma Guillou
+// Last update Mon Mar 10 18:04:53 2014 Lyoma Guillou
 //
 
 #include	<string.h>
@@ -65,14 +65,16 @@ ActionExec::~ActionExec()
   delete this->_arg;
 }
 
+/*
 void		ActionExec::apply()
 {
   execvp(this->_arg[0], this->_arg);
 }
+*/
 
 // fork needed?
 
-/*
+
 void		ActionExec::apply()
 {
   pid_t		pid;
@@ -91,28 +93,56 @@ void		ActionExec::apply()
       pid_t	parent = getppid();
 
       // changing process group ?
-      sleep(3);
-      if (0 > setpgid(getpid(), getpid()))
-	std::cerr << "setpgid error" << std::endl;
-      kill(parent, SIGINT);
+      sleep(1);
+      std::cout << "==Child==" << std::endl;
+      std::cout << "PID: " << getpid() << std::endl;
+      std::cout << "PPID: " << getppid() << std::endl;
+      std::cout << "SID: " << getsid(0) << std::endl;
+      std::cout << "PGID: " << getpgid(0) << std::endl;
+
+      //      setsid();
+      sleep(1);
+      setpgid(0, 0);
+      kill(parent, SIGTERM);
+      // if (0 > setpgid(getpid(), getsid(0)))
+      // 	std::cerr << "setpgid error" << std::endl;
+      sleep(1);
+      std::cout << "==Child==" << std::endl;
+      std::cout << "PID: " << getpid() << std::endl;
+      std::cout << "PPID: " << getppid() << std::endl;
+      std::cout << "SID: " << getsid(0) << std::endl;
+      std::cout << "PGID: " << getpgid(0) << std::endl << std::endl;
+
+      execvp(this->_arg[0], this->_arg);
       while (true)
-	{
-	  sleep(1);
-	  std::cout << "child here" << std::endl;
-	}
+      	{
+      	  sleep(1);
+      	  std::cout << "child here" << std::endl;
+      	}
     }
   else
     {
       // parent
-      
+      std::cout << "==Parent==" << std::endl;
+      std::cout << "PID: " << getpid() << std::endl;
+      std::cout << "PPID: " << getppid() << std::endl;
+      std::cout << "SID: " << getsid(0) << std::endl;
+      std::cout << "PGID: " << getpgid(0) << std::endl;
+
+      wait(0);
+      //      setpgid(pid, getpgid(getppid()));
+
+      //while (true);
+      //setpgid(pid, getpgid(getpid()));
+      //wait(0);
       // detach child here
       // assing child to pgid
-      while (true)
-	{
-	  sleep(1);
-	  std::cout << "parent here" << std::endl;
-	  // loop to wait on child to kill the parent
-	}
+      // while (true)
+      // 	{
+      // 	  sleep(1);
+      // 	  std::cout << "parent here" << std::endl;
+      // 	  // loop to wait on child to kill the parent
+      // 	}
     }
 }
-*/
+

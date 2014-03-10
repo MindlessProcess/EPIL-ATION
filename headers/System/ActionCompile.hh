@@ -5,7 +5,7 @@
 // Login   <guillo_e@epitech.net>
 // 
 // Started on  Tue Mar  4 15:10:20 2014 Lyoma Guillou
-// Last update Sat Mar  8 18:46:51 2014 Lyoma Guillou
+// Last update Mon Mar 10 18:15:11 2014 Lyoma Guillou
 //
 
 #ifndef		EPIL_SYSTEM_ACTIONCOMPILE_HH_
@@ -19,16 +19,20 @@ namespace	epil
   {
   public:
     ActionCompile(std::string const &id, std::string const &makeCmd = "make re", std::string const &path = ".");
-    ActionCompile(std::string const &id, std::string const &cmd, std::string const &flag, std::string const &name, std::string const &obj, std::string const &path = ".");
+    ActionCompile(std::string const &id, std::string const &cmd, std::string const &flag, std::string const &obj, std::string const &name = "", std::string const &path = ".");
     ~ActionCompile();
 
-    virtual void	apply();
+    void	apply();
 
   private:
     std::string	_path;
     std::string	_cmd;
 
     ActionCompile();
+
+    inline bool	_isWorkingDir();
+    inline bool	_isValidPath();
+    inline bool	_changeDir();
 
     void	_format_path();
   };

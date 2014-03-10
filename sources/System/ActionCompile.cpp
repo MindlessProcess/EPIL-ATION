@@ -5,7 +5,7 @@
 // Login   <guillo_e@epitech.net>
 // 
 // Started on  Sat Mar  8 14:39:47 2014 Lyoma Guillou
-// Last update Sat Mar  8 18:51:56 2014 Lyoma Guillou
+// Last update Mon Mar 10 15:57:58 2014 Lyoma Guillou
 //
 
 #include	<unistd.h>
@@ -26,11 +26,11 @@ ActionCompile::ActionCompile(std::string const &id, std::string const &makeCmd, 
 {
 }
 
-ActionCompile::ActionCompile(std::string const &id, std::string const &cmd, std::string const &flag, std::string const &name, std::string const &obj, std::string const &path) : Action(id), _path(path)
+ActionCompile::ActionCompile(std::string const &id, std::string const &cmd, std::string const &flag, std::string const &obj, std::string const &name, std::string const &path) : Action(id), _path(path)
 {
   if (!cmd.empty() && !obj.empty())
     {
-      this->_cmd = cmd + " -c " + obj;
+      this->_cmd = cmd + " " + obj;
       if (!name.empty())
 	this->_cmd = this->_cmd + " -o " + name;
       if (!flag.empty())
@@ -53,14 +53,41 @@ ActionCompile::~ActionCompile()
 {
 }
 
+inline bool	ActionCompile::_isWorkingDir()
+{
+  if (0 == this->_path.compare(".") || 0 == this->_path.compare(getenv("PWD")))
+    return true;
+  return false;
+}
+
+inline bool	ActionCompile::_isValidPath()
+{
+  if (0 == access(this->_path.c_str(), F_OK))
+    return true;
+  std::cerr << "Error: Access() could not find the file" << std::endl;
+  return false;
+}
+
+inline bool	ActionCompile::_changeDir()
+{
+  if (0 == chdir(this->_path.c_str()))
+    return true;
+  std::cerr << "Error: Chdir() could not open directory" << std::endl;
+  return false;
+}
+
 void		ActionCompile::_format_path()
 {
   char		*path;
   unsigned	pos;
 
-  pos = this->_path.find("~");
-  this->_path = std::string(strcat(getenv("HOME"), this->_path.substr(pos + 1).c_str()));
+  if (std::string::npos != this->_path.find("~"))
+    {
+      pos = this->_path.find("~");
+      this->_path = std::string(strcat(getenv("HOME"), this->_path.substr(pos + 1).c_str()));
+    }
 }
+
 
 void		ActionCompile::apply()
 {
@@ -71,18 +98,14 @@ void		ActionCompile::apply()
     std::cerr << "Fork error" << std::endl;
   if (0 == pid)
     {
-      if (this->_path[0] == '~')
-	this->_format_path();
-      if (0 != this->_path.compare("."))
-	{
-	  if (0 > access(_path.c_str(), F_OK) && 0 > chdir(_path.c_str()))
-	    {
-	      std::cerr << "Error: Path is probably non existant" << std::endl;
-	      exit(EXIT_FAILURE);
-	    }
-	  system(_cmd.c_str());
-	  exit(EXIT_SUCCESS);
-	}
+      this->_format_path();
+      //std::cout << this->_path << std::endl;
+      if (!_isWorkingDir())
+	if (!_isValidPath() || !_changeDir())
+	  exit(EXIT_FAILURE);
+      std::cout << this->_cmd << std::endl;
+      system(this->_cmd.c_str());
+      exit(EXIT_SUCCESS);
     }
   else
     wait(0);
