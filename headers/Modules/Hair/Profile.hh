@@ -20,43 +20,54 @@
 # include "Action.hh"
 # include "ActionWrite.hh"
 
+# include "Console.hpp"
+
 namespace	epil
 {
-  class		Profile
+  namespace hair
   {
-  public:
-    Profile();
-    Profile(std::string const &id);
-    ~Profile();
-
-    void	setId(std::string const &id);
-    std::string const	&getId();
-
-    bool  isComplete();
-
-    Profile &setAction(Action*);
-    template <typename T>
-    Action *setAction(std::string const &id)
+    class		Profile
     {
-      this->_actionList.push_back(new T(id));
-      return (this->_actionList.back());
-      // return (dynamic_cast<ActionWrite*>(this->_actionList.back()));
-    }
-    std::list<Action*>  &getActionList();
+    public:
+      Profile();
+      Profile(std::string const &id);
+      ~Profile();
 
-    /**
-     * Action order functions
-     */
-    void  changeActionOrder(std::string const&, std::string const&);
-    void  changeActionOrder(std::pair<std::string, std::string> const&);
+      void	setId(std::string const &id);
+      std::string const	&getId();
 
-    void  revertActionOrder();
-  private:
-    std::string	_id;
+      bool  isComplete();
 
-    // Defining VT (Variant Type) as a template type possibly being one of these types :
-    // typedef boost::variant<int, std::string const&> VT;
-    std::list<Action*>	_actionList;
+      Profile &setAction(Action*);
+      template <typename T>
+      Action *setAction(std::string const &id)
+      {
+	this->_actionList.push_back(new T(id));
+	return (this->_actionList.back());
+	// return (dynamic_cast<ActionWrite*>(this->_actionList.back()));
+      }
+      std::list<Action*>  &getActionList();
+
+      /**
+       * Action order functions
+       */
+      void  changeActionOrder(std::string const&, std::string const&);
+      void  changeActionOrder(std::pair<std::string, std::string> const&);
+
+      void  revertActionOrder();
+
+
+      /**
+       * Profile running
+       */
+      void apply();
+    private:
+      std::string	_id;
+
+      // Defining VT (Variant Type) as a template type possibly being one of these types :
+      // typedef boost::variant<int, std::string const&> VT;
+      std::list<Action*>	_actionList;
+    };
   };
 };
 

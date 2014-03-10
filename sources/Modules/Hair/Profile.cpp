@@ -11,6 +11,7 @@
 #include  "Profile.hh"
 
 using namespace	epil;
+using namespace	hair;
 
 Profile::Profile()
 {
@@ -47,45 +48,53 @@ std::string const   &Profile::getId()
 
 void  Profile::changeActionOrder(std::string const &first_id, std::string const &second_id)
 {
-  Action *first_action = NULL;
-  Action *second_action = NULL;
+  // Action *first_action = NULL;
+  // Action *second_action = NULL;
 
-  for (std::list<Action*>::iterator it = this->_actionList.begin(); it != _actionList.end(); ++it)
-  {
-    if ((*it)->getId() == first_id)
-    {
-      first_action = *it;
-      if (second_action == NULL)
-        break;
-      else
-        continue;
-    }
-    if ((*it)->getId() == second_id)
-    {
-      second_action = *it;
-      if (first_action == NULL)
-        break;
-      else
-        continue;
-    }
-  }
-  if (first_action != NULL && second_action != NULL)
-  {
-    std::iter_swap(first_action, second_action);
-  }
-}
-void  Profile::changeActionOrder(std::pair<std::string, std::string> const &pair)
-{
-  (void)pair;
+  // for (std::list<Action*>::iterator it = this->_actionList.begin(); it != _actionList.end(); ++it)
+  // {
+  //   if ((*it)->getId() == first_id)
+  //   {
+  //     first_action = dynamic_cast<>(*it);
+  //     if (second_action == NULL)
+  //       break;
+  //     else
+  //       continue;
+  //   }
+  //   if ((*it)->getId() == second_id)
+  //   {
+  //     second_action = *it;
+  //     if (first_action == NULL)
+  //       break;
+  //     else
+  //       continue;
+  //   }
+  // }
+  // if (first_action != NULL && second_action != NULL)
+  // {
+  //   std::iter_swap(first_action, second_action);
+  // }
 }
 
 void  Profile::revertActionOrder()
 {
+  // this->_actionList.reverse();
 }
 
 bool	Profile::isComplete()
 {
   return (!this->_id.empty() ? true : false);
+}
+
+void	Profile::apply()
+{
+  Console::nlog("====In Profile::apply()=====");
+  for (std::list<Action*>::iterator it = this->_actionList.begin(); it != this->_actionList.end(); ++it)
+    {
+      Console::nlog("action <"+(*it)->getId()+"> apply()");
+      (*it)->apply();
+    }
+  Console::nlog("====In Profile::apply()=====");
 }
 
 Profile::~Profile()

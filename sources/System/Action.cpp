@@ -12,14 +12,6 @@
 
 using namespace epil;
 
-Action::Action(std::string const &id)
-  : _id(id)
-{
-}
-Action::~Action()
-{
-}
-
 void  Action::setId(std::string const &id)
 {
   this->_id = id;
@@ -28,3 +20,8 @@ std::string const &Action::getId() const
 {
   return (this->_id);
 }
+
+// void Action::apply()
+// {
+//   hair::Console::nlog("In action <"+this->getId()+"> apply()");
+// }

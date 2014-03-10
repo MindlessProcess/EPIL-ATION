@@ -27,29 +27,26 @@ void	Epil::setWorkspace(std::string const &workspace_path)
     }
 }
 
-void	Epil::loadProfile(Profile *profile)
+void	Epil::loadProfile(hair::Profile *profile)
 {
   if (profile->isComplete())
     this->_profileList.push_back(profile);
   else
     std::cerr << "Profile incomplete" << std::endl;
-    // throw new std::exception("Fatal error: profile incomplete");
+  // throw new std::exception("Fatal error: profile incomplete");
 }
 
 void	Epil::useProfile(std::string const &id)
 {
-  std::cout << "========In Epil::useProfile()============" << std::endl;
-  std::cout << "Profile needed = " << id << std::endl;
-  for (std::list<Profile*>::iterator it = this->_profileList.begin();
-    it != this->_profileList.end(); ++it)
-  {
-    std::cout << "Profile ID = " << (*it)->getId() << std::endl;
-    if (!id.compare((*it)->getId()))
+  for (std::list<hair::Profile*>::iterator it = this->_profileList.begin();
+       it != this->_profileList.end(); ++it)
     {
-      std::cout << "Profile found = " << (*it)->getId() << std::endl;
+      if (!id.compare((*it)->getId()))
+	{
+	  (*it)->apply();
+	  hair::Console::nlog("Profile found = "+(*it)->getId());
+	}
     }
-  }
-  std::cout << "========Out of Epil::useProfile()========" << std::endl;
 }
 
 void	Epil::wr_setDst(std::string const &dst_file, BlockList const &block)

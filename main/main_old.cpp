@@ -4,34 +4,35 @@
 
 void  set_profile(std::string const &id, epil::Epil *epil)
 {
-  epil::hair::Profile *profile = new epil::hair::Profile();
+  epil::hair::Console::nlog("========In Epil::setProfile()============");
+  epil::Profile	*profile = new epil::Profile();
   profile->setId(id);
 
   // creating an ActionWrite --------------------
   epil::Action *wr_action = new epil::ActionWrite("wr_action");
-  // epil::ActionWrite *wr_action_tmp;
-  // wr_action_tmp = dynamic_cast<epil::ActionWrite*>(wr_action);
-  // if (wr_action_tmp == 0)
-  //   return;
-  // wr_action_tmp->wr_setDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)));
-  // wr_action_tmp->wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
+  epil::hair::Console::nlog("----In file loading--------");
+  dynamic_cast<ActionWrite*>(wr_action)->wr_setDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)));
+  dynamic_cast<ActionWrite*>(wr_action)->wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
+  epil::hair::Console::nlog("----Out of file loading----\n");
   profile->setAction(wr_action);
 
   // creating another ActionWrite ---------------
-  epil::Action *wr_action_bis = new epil::ActionWrite("wr_action_bis");
-  // wr_action_tmp = dynamic_cast<epil::ActionWrite*>(wr_action_bis);
-  // if (wr_action_tmp == 0)
-  //   return;
-  // wr_action_tmp->wr_setDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)));
-  // wr_action_tmp->wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
+  epil::ActionWrite *wr_action_bis = new epil::ActionWrite("wr_action_bis");
+  epil::hair::Console::nlog("----In file loading--------");
+  wr_action_bis->wr_setDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)));
+  wr_action_bis->wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
+  epil::hair::Console::nlog("----Out of file loading----\n");
   profile->setAction(wr_action_bis);
 
   // creating another ActionWrite ---------------
   epil::ActionWrite *wr_action_ter = new epil::ActionWrite("wr_action_ter");
+  epil::hair::Console::nlog("----In file loading--------");
   wr_action_ter->wr_setDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)));
   wr_action_ter->wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
+  epil::hair::Console::nlog("----Out of file loading----\n");
   profile->setAction(wr_action_ter);
 
+  epil::hair::Console::nlog("----Printing actions--------");
   epil::hair::Console::log("Action = <");
   for (std::list<epil::Action*>::iterator it = profile->getActionList().begin(); it != profile->getActionList().end(); ++it)
     {
@@ -52,9 +53,11 @@ void  set_profile(std::string const &id, epil::Epil *epil)
 	epil::hair::Console::log(", ");
     }
   epil::hair::Console::nlog(">");
-  epil::hair::Console::nlog("");
   // std::cout << "End of printing actions" << std::endl;
+
   epil->loadProfile(profile);
+  epil::hair::Console::nlog("========Out of Epil::setProfile()========");
+  epil::hair::Console::nlog("");
 }
 
 int	main()

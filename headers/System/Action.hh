@@ -11,26 +11,23 @@
 #ifndef		EPIL_SYSTEM_ACTION_HH_
 # define	EPIL_SYSTEM_ACTION_HH_
 
-#include  <iostream>
+# include <iostream>
+# include <string>
+
+# include "Console.hpp"
 
 namespace	epil
 {
-  enum		AType
-  {
-    NIL,
-    MODIFY,
-    COMPILE,
-    EXEC
-  };
-
   class		Action
   {
   public:
-    Action(std::string const &id);
-    ~Action();
+    Action(std::string const &id) :_id(id) {}
+    virtual ~Action() {}
 
     void    setId(std::string const &);
     std::string const & getId() const;
+
+    virtual void apply() = 0;
 
     // virtual void apply() = 0;
 
@@ -41,11 +38,8 @@ namespace	epil
     // void wr_setSrc(std::string const&, epil::BlockList*); //SRC_FILE, BLOCK
 
 
-  private:
-    AType _type;
+  protected:
     std::string _id;
-
-    Action();
   };
 };
 

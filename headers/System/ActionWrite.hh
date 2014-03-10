@@ -13,13 +13,16 @@
 
 # include	<iostream>
 # include	<fstream>
+# include	<string>
 
 # include	"Action.hh"
 //
 // Needed for setSrc() and setDst()
 //
 # include	"BlockList.hh"
-# include   "FileSystem.hpp"
+
+# include	"FileSystem.hpp"
+# include	"Console.hpp"
 
 namespace	epil
 {
