@@ -8,22 +8,15 @@ void  set_profile(std::string const &id, epil::Epil *epil)
   profile->setId(id);
 
   // creating an ActionWrite --------------------
-  epil::Action *wr_action = new epil::ActionWrite("wr_action");
-  // epil::ActionWrite *wr_action_tmp;
-  // wr_action_tmp = dynamic_cast<epil::ActionWrite*>(wr_action);
-  // if (wr_action_tmp == 0)
-  //   return;
-  // wr_action_tmp->wr_setDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)));
-  // wr_action_tmp->wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
+  epil::ActionWrite *wr_action = new epil::ActionWrite("wr_action");
+  wr_action->wr_setDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)));
+  wr_action->wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
   profile->setAction(wr_action);
 
   // creating another ActionWrite ---------------
-  epil::Action *wr_action_bis = new epil::ActionWrite("wr_action_bis");
-  // wr_action_tmp = dynamic_cast<epil::ActionWrite*>(wr_action_bis);
-  // if (wr_action_tmp == 0)
-  //   return;
-  // wr_action_tmp->wr_setDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)));
-  // wr_action_tmp->wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
+  epil::ActionWrite *wr_action_bis = new epil::ActionWrite("wr_action_bis");
+  wr_action_bis->wr_setDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)));
+  wr_action_bis->wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
   profile->setAction(wr_action_bis);
 
   // creating another ActionWrite ---------------
@@ -40,10 +33,10 @@ void  set_profile(std::string const &id, epil::Epil *epil)
 	epil::hair::Console::log(", ");
     }
   epil::hair::Console::nlog(">");
-  // profile->changeActionOrder("wr_action", "wr_action_bis");
-  // epil::hair::Console::nlog("Action order changed");
-  profile->revertActionOrder();
-  epil::hair::Console::nlog("Action order reversed");
+  profile->changeActionOrder("wr_action", "wr_action_bis");
+  epil::hair::Console::nlog("Action order changed");
+  // profile->revertActionOrder();
+  // epil::hair::Console::nlog("Action order reversed");
   epil::hair::Console::log("Action = <");
   for (std::list<epil::Action*>::iterator it = profile->getActionList().begin(); it != profile->getActionList().end(); ++it)
     {

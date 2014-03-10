@@ -48,32 +48,61 @@ std::string const   &Profile::getId()
 
 void  Profile::changeActionOrder(std::string const &first_id, std::string const &second_id)
 {
-  // Action *first_action = NULL;
-  // Action *second_action = NULL;
+  ActionWrite *first_action = NULL;
+  ActionWrite *second_action = NULL;
 
-  // for (std::list<Action*>::iterator it = this->_actionList.begin(); it != _actionList.end(); ++it)
-  // {
-  //   if ((*it)->getId() == first_id)
-  //   {
-  //     first_action = dynamic_cast<>(*it);
-  //     if (second_action == NULL)
-  //       break;
-  //     else
-  //       continue;
-  //   }
-  //   if ((*it)->getId() == second_id)
-  //   {
-  //     second_action = *it;
-  //     if (first_action == NULL)
-  //       break;
-  //     else
-  //       continue;
-  //   }
-  // }
-  // if (first_action != NULL && second_action != NULL)
-  // {
-  //   std::iter_swap(first_action, second_action);
-  // }
+  hair::Console::nlog("first_id = <"+first_id+">");
+  hair::Console::nlog("second_id = <"+second_id+">");
+  for (std::list<Action*>::iterator it = this->_actionList.begin(); it != _actionList.end(); ++it)
+  {
+    hair::Console::nlog("getId() = <"+(*it)->getId()+">");
+    if (!(*it)->getId().compare(first_id))
+    {
+      if ((first_action = dynamic_cast<ActionWrite*>(*it)) == 0)
+	{
+	  // if ((first_action = dynamic_cast<epil::ActionCompile*>(*it)) == 0)
+	  //   {
+	  //     if ((first_action = dynamic_cast<epil::ActionExec*>(*it)) == 0)
+	  // 	{
+	  hair::Console::nlog("FAIL WITH DYNAMIC_CASTS");
+	    // 	}
+	    // }
+	}
+      else
+	hair::Console::nlog("IT IS ACTIONWRITE");
+      if (second_action != NULL)
+        break;
+      else
+        continue;
+    }
+    if ((*it)->getId() == second_id)
+    {
+      // second_action = *it;
+      if ((second_action = dynamic_cast<epil::ActionWrite*>(*it)) == 0)
+	{
+	  // if ((second_action = dynamic_cast<epil::ActionCompile*>(*it)) == 0)
+	  //   {
+	  //     if ((second_action = dynamic_cast<epil::ActionExec*>(*it)) == 0)
+	  // 	{
+	  hair::Console::nlog("FAIL WITH DYNAMIC_CASTS");
+	    // 	}
+	    // }
+	}
+      else
+	hair::Console::nlog("IT IS ACTIONWRITE");
+      if (first_action != NULL)
+        break;
+      else
+        continue;
+    }
+  }
+  if (first_action != NULL && second_action != NULL)
+  {
+    hair::Console::nlog("SWAPPING ORDERS");
+    std::iter_swap(first_action, second_action);
+  }
+  else
+    hair::Console::nlog("NOT SWAPPING ORDERS");
 }
 
 void  Profile::revertActionOrder()
