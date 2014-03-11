@@ -5,7 +5,7 @@
 // Login   <guillo_e@epitech.net>
 // 
 // Started on  Tue Mar  4 15:10:20 2014 Lyoma Guillou
-// Last update Mon Mar 10 18:15:11 2014 Lyoma Guillou
+// Last update Tue Mar 11 11:25:13 2014 Lyoma Guillou
 //
 
 #ifndef		EPIL_SYSTEM_ACTIONCOMPILE_HH_
@@ -27,8 +27,6 @@ namespace	epil
   private:
     std::string	_path;
     std::string	_cmd;
-
-    ActionCompile();
 
     inline bool	_isWorkingDir();
     inline bool	_isValidPath();

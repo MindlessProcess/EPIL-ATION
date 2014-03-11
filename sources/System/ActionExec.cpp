@@ -5,7 +5,7 @@
 // Login   <guillo_e@epitech.net>
 // 
 // Started on  Tue Mar  4 15:40:08 2014 Lyoma Guillou
-// Last update Mon Mar 10 18:04:53 2014 Lyoma Guillou
+// Last update Tue Mar 11 11:29:59 2014 Lyoma Guillou
 //
 
 #include	<string.h>
@@ -23,14 +23,20 @@
 
 using namespace	epil;
 
-ActionExec::ActionExec() : Action(""), _cmd(""), _arg(NULL)
+ActionExec::ActionExec(std::string const &id, std::string const &cmd) : Action(id), _cmd(cmd), _arg(NULL)
 {
+  this->_init();
 }
 
-ActionExec::ActionExec(std::string const &id, std::string const &cmd, std::string const &opt) : Action(id), _cmd(cmd + " " + opt), _arg(NULL)
+ActionExec::~ActionExec()
 {
-  // parse cmd and opt
-  // must create an array of char *
+  for (int i = 0; this->_arg[i]; ++i)
+    delete[] this->_arg[i];
+  delete this->_arg;
+}
+
+void		ActionExec::_init()
+{
   std::stringstream	ss;
   std::string		str;
   char			*tmp;
@@ -58,22 +64,13 @@ ActionExec::ActionExec(std::string const &id, std::string const &cmd, std::strin
   this->_arg[i] = NULL;
 }
 
-ActionExec::~ActionExec()
-{
-  for (int i = 0; this->_arg[i]; ++i)
-    delete[] this->_arg[i];
-  delete this->_arg;
-}
+// Unforked version for implementation purpose
 
-/*
-void		ActionExec::apply()
-{
-  execvp(this->_arg[0], this->_arg);
-}
-*/
-
-// fork needed?
-
+// void		ActionExec::apply()
+// {
+//   if (0 > (execvp(this->_arg[0], this->_arg)))
+//     std::cerr << "Error: Child process could not execute" << std::endl;
+// }
 
 void		ActionExec::apply()
 {
@@ -85,64 +82,8 @@ void		ActionExec::apply()
       std::cerr << "Fork Error" << std::endl;
       return;
     }
-  if (0 == pid)
-    {
-      // child
-
-      // get the parent process to kill
-      pid_t	parent = getppid();
-
-      // changing process group ?
-      sleep(1);
-      std::cout << "==Child==" << std::endl;
-      std::cout << "PID: " << getpid() << std::endl;
-      std::cout << "PPID: " << getppid() << std::endl;
-      std::cout << "SID: " << getsid(0) << std::endl;
-      std::cout << "PGID: " << getpgid(0) << std::endl;
-
-      //      setsid();
-      sleep(1);
-      setpgid(0, 0);
-      kill(parent, SIGTERM);
-      // if (0 > setpgid(getpid(), getsid(0)))
-      // 	std::cerr << "setpgid error" << std::endl;
-      sleep(1);
-      std::cout << "==Child==" << std::endl;
-      std::cout << "PID: " << getpid() << std::endl;
-      std::cout << "PPID: " << getppid() << std::endl;
-      std::cout << "SID: " << getsid(0) << std::endl;
-      std::cout << "PGID: " << getpgid(0) << std::endl << std::endl;
-
-      execvp(this->_arg[0], this->_arg);
-      while (true)
-      	{
-      	  sleep(1);
-      	  std::cout << "child here" << std::endl;
-      	}
-    }
+  if (0 == pid && 0 > (execvp(this->_arg[0], this->_arg)))
+    std::cerr << "Error: Child process could not execute" << std::endl;
   else
-    {
-      // parent
-      std::cout << "==Parent==" << std::endl;
-      std::cout << "PID: " << getpid() << std::endl;
-      std::cout << "PPID: " << getppid() << std::endl;
-      std::cout << "SID: " << getsid(0) << std::endl;
-      std::cout << "PGID: " << getpgid(0) << std::endl;
-
-      wait(0);
-      //      setpgid(pid, getpgid(getppid()));
-
-      //while (true);
-      //setpgid(pid, getpgid(getpid()));
-      //wait(0);
-      // detach child here
-      // assing child to pgid
-      // while (true)
-      // 	{
-      // 	  sleep(1);
-      // 	  std::cout << "parent here" << std::endl;
-      // 	  // loop to wait on child to kill the parent
-      // 	}
-    }
+    wait(0);
 }
-
