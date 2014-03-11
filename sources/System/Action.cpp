@@ -5,7 +5,7 @@
 // Login   <lucas@epitech.net>
 // 
 // Started on  Mon Feb 24 23:40:00 2014 Lucas Merlette
-// Last update Sun Mar  2 17:17:19 2014 Lyoma Guillou
+// Last update Tue Mar 11 11:37:19 2014 Lyoma Guillou
 //
 
 #include "Action.hh"
@@ -20,8 +20,3 @@ std::string const &Action::getId() const
 {
   return (this->_id);
 }
-
-// void Action::apply()
-// {
-//   hair::Console::nlog("In action <"+this->getId()+"> apply()");
-// }
