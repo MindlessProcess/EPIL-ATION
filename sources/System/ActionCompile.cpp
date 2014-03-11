@@ -5,7 +5,7 @@
 // Login   <guillo_e@epitech.net>
 // 
 // Started on  Sat Mar  8 14:39:47 2014 Lyoma Guillou
-// Last update Mon Mar 10 15:57:58 2014 Lyoma Guillou
+// Last update Tue Mar 11 11:31:40 2014 Lyoma Guillou
 //
 
 #include	<unistd.h>
@@ -43,10 +43,6 @@ ActionCompile::ActionCompile(std::string const &id, std::string const &cmd, std:
       if (obj.empty())
 	std::cerr << "Error: No source files set" << std::endl;
     }
-}
-
-ActionCompile::ActionCompile() : Action(""), _path("") , _cmd("")
-{
 }
 
 ActionCompile::~ActionCompile()
@@ -88,7 +84,6 @@ void		ActionCompile::_format_path()
     }
 }
 
-
 void		ActionCompile::apply()
 {
   pid_t		pid;
@@ -99,7 +94,6 @@ void		ActionCompile::apply()
   if (0 == pid)
     {
       this->_format_path();
-      //std::cout << this->_path << std::endl;
       if (!_isWorkingDir())
 	if (!_isValidPath() || !_changeDir())
 	  exit(EXIT_FAILURE);
