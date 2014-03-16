@@ -1,15 +1,5 @@
-//
-// Block.hpp for Epil in /home/lucas/Documents/Epitech/Tech3/PFA/epil-ation/headers/Modules
-// 
-// Made by Lucas Merlette
-// Login   <lucas@epitech.net>
-// 
-// Started on  Mon Feb 24 23:31:33 2014 Lucas Merlette
-// Last update Sun Mar  2 13:44:03 2014 Lyoma Guillou
-//
-
-#ifndef		EPIL_MODULES_BLOCKS_HH_
-# define	EPIL_MODULES_BLOCKS_HH_
+#ifndef		EPIL_MODULES_BLOCKLIST_HH_
+# define	EPIL_MODULES_BLOCKLIST_HH_
 
 # include	<list>
 # include	<tuple>
@@ -37,4 +27,4 @@ namespace	epil
   };
 };
 
-#endif		/* !EPIL_MODULES_BLOCKS_HH_ */
+#endif		/* !EPIL_MODULES_BLOCKLIST_HH_ */

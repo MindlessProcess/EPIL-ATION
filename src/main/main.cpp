@@ -4,7 +4,7 @@
 
 void  set_profile(std::string const &id, epil::Epil *epil)
 {
-  epil::hair::Profile *profile = new epil::hair::Profile();
+  epil::Profile *profile = new epil::Profile();
   profile->setId(id);
 
   // creating an ActionWrite --------------------
@@ -25,27 +25,27 @@ void  set_profile(std::string const &id, epil::Epil *epil)
   wr_action_ter->wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
   profile->setAction(wr_action_ter);
 
-  epil::hair::Console::log("Action = <");
+  epil::utils::Console::log("Action = <");
   for (std::list<epil::Action*>::iterator it = profile->getActionList().begin(); it != profile->getActionList().end(); ++it)
     {
-      epil::hair::Console::log((*it)->getId());
+      epil::utils::Console::log((*it)->getId());
       if (it != profile->getActionList().end() && (it != --profile->getActionList().end()))
-	epil::hair::Console::log(", ");
+	epil::utils::Console::log(", ");
     }
-  epil::hair::Console::nlog(">");
+  epil::utils::Console::nlog(">");
   profile->changeActionOrder("wr_action", "wr_action_bis");
-  epil::hair::Console::nlog("Action order changed");
+  epil::utils::Console::nlog("Action order changed");
   // profile->revertActionOrder();
-  // epil::hair::Console::nlog("Action order reversed");
-  epil::hair::Console::log("Action = <");
+  // epil::utils::Console::nlog("Action order reversed");
+  epil::utils::Console::log("Action = <");
   for (std::list<epil::Action*>::iterator it = profile->getActionList().begin(); it != profile->getActionList().end(); ++it)
     {
-      epil::hair::Console::log((*it)->getId());
+      epil::utils::Console::log((*it)->getId());
       if (it != profile->getActionList().end() && (it != --profile->getActionList().end()))
-	epil::hair::Console::log(", ");
+	epil::utils::Console::log(", ");
     }
-  epil::hair::Console::nlog(">");
-  epil::hair::Console::nlog("");
+  epil::utils::Console::nlog(">");
+  epil::utils::Console::nlog("");
   // std::cout << "End of printing actions" << std::endl;
   epil->loadProfile(profile);
 }
@@ -66,56 +66,41 @@ int	main()
   std::cout << std::endl;
   return (0);
 
-  // Unit tests on wr_functions
-  // {
-  //   epil::Epil  *epil = new epil::Epil();
-  //   epil->wr_setDst("misc/dst_file.c", epil::BlockList(std::make_pair(1, 8), std::make_pair(2, 7)));
-  //   epil->wr_setSrc("misc/src_file.c", epil::BlockList(std::make_pair(4, 6)));
-
-  //   epil->wr_run();
-  // }
-
-  {
-    Workspace workspace;
-    workspace.set_wd(".");
-  }
-  // std::cout << std::endl;
-
   // Unit tests on Console.hh
   {
-    epil::hair::Console::log("Console.log test");
+    epil::utils::Console::log("Console.log test");
   }
   std::cout << std::endl;
 
   // Unit tests on FileSystem.hpp
   {
     std::string file = "README";
-    if (epil::shave::FileSystem::isfile(file))
+    if (epil::utils::FileSystem::isfile(file))
     {
-      epil::hair::Console::log(file+" is a file !");
-      if (epil::shave::FileSystem::isreadable(file))
+      epil::utils::Console::log(file+" is a file !");
+      if (epil::utils::FileSystem::isreadable(file))
       {
-        epil::hair::Console::log(file+" is readable !");
-        if (epil::shave::FileSystem::iswritable(file))
+        epil::utils::Console::log(file+" is readable !");
+        if (epil::utils::FileSystem::iswritable(file))
         {
-          epil::hair::Console::log(file+" is writable !");
-          if (epil::shave::FileSystem::isexecutable(file))
-            epil::hair::Console::log(file+" is executable !");
+          epil::utils::Console::log(file+" is writable !");
+          if (epil::utils::FileSystem::isexecutable(file))
+            epil::utils::Console::log(file+" is executable !");
           else
-            epil::hair::Console::log(std::cerr, file+" is not executable !");
+            epil::utils::Console::log(std::cerr, file+" is not executable !");
         }
         else
-          epil::hair::Console::log(std::cerr, file+" is not writable !");
+          epil::utils::Console::log(std::cerr, file+" is not writable !");
       }
       else
-        epil::hair::Console::log(std::cerr, file+" is not readable !");
+        epil::utils::Console::log(std::cerr, file+" is not readable !");
     }
     else
-      epil::hair::Console::log(std::cerr, file+" is not a file !");
+      epil::utils::Console::log(std::cerr, file+" is not a file !");
 
-    if (epil::shave::FileSystem::isusable(file))
-      epil::hair::Console::log(file+" is fully usable !");
+    if (epil::utils::FileSystem::isusable(file))
+      epil::utils::Console::log(file+" is fully usable !");
     else
-      epil::hair::Console::log(std::cerr, file+" is not fully usable !");
+      epil::utils::Console::log(std::cerr, file+" is not fully usable !");
   }
 }

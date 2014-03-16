@@ -18,7 +18,6 @@
 
 # include	"BlockList.hh"
 # include	"Profile.hh"
-# include	"Workspace.hh"
 
 # include	"FileSystem.hpp"
 # include	"Console.hpp"
@@ -31,13 +30,10 @@ namespace	epil
     Epil();
     ~Epil();
 
-    void setWorkspace(std::string const &workspace_path = 0);
-    Workspace *getWorkspace();
-
     /**
      * Profile methods
      */
-    void loadProfile(hair::Profile*);
+    void loadProfile(Profile*);
     void useProfile(std::string const&);
 
     void wr_setDst(std::string const&, epil::BlockList const&); //DST_FILE, BLOCK
@@ -62,9 +58,7 @@ namespace	epil
     BlockList _dst_block;
     BlockList _src_block;
 
-    Workspace *_workspace;
-
-    std::list<hair::Profile*> _profileList;
+    std::list<Profile*> _profileList;
   };
 };
 

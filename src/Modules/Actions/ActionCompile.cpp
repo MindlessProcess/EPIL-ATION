@@ -74,7 +74,7 @@ inline bool	ActionCompile::_changeDir()
 
 void		ActionCompile::_format_path()
 {
-  char		*path;
+  // char		*path;
   unsigned	pos;
 
   if (std::string::npos != this->_path.find("~"))

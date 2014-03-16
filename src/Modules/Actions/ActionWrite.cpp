@@ -11,9 +11,9 @@ ActionWrite &ActionWrite::wr_setDst(std::string const &dst_file, epil::BlockList
 {
   if (!this->_dst_set)
     {
-      hair::Console::log("Action <"+this->_id+"> : ");
+      utils::Console::log("Action <"+this->_id+"> : ");
       std::cout << "Loading file <"+dst_file+">...\t";
-      if (shave::FileSystem::isfile(dst_file))
+      if (utils::FileSystem::isfile(dst_file))
 	{
 	  this->_dst_file	= dst_file;
 	  this->_dst_block	= blockList;
@@ -30,9 +30,9 @@ ActionWrite &ActionWrite::wr_setSrc(std::string const &src_file, epil::BlockList
 {
   if (!this->_src_set)
     {
-      hair::Console::log("Action <"+this->_id+"> : ");
+      utils::Console::log("Action <"+this->_id+"> : ");
       std::cout << "Loading file <"+src_file+">...\t";
-      if (shave::FileSystem::isfile(src_file))
+      if (utils::FileSystem::isfile(src_file))
 	{
 	  this->_src_file	= src_file;
 	  this->_src_block	= blockList;
@@ -47,7 +47,7 @@ ActionWrite &ActionWrite::wr_setSrc(std::string const &src_file, epil::BlockList
 
 void ActionWrite::apply()
 {
-  hair::Console::nlog("In actionWrite <"+this->getId()+"> apply()");
+  utils::Console::nlog("In actionWrite <"+this->getId()+"> apply()");
 }
 
 ActionWrite::~ActionWrite()

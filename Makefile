@@ -1,39 +1,19 @@
-##
-## Makefile for Epil in /home/lucas/Documents/Epitech/Tech3/PFA/epil-ation
-## 
-## Made by Lucas Merlette
-## Login   <lucas@epitech.net>
-## 
-## Started on  Mon Feb 24 23:44:12 2014 Lucas Merlette
-## Last update Tue Mar  4 17:51:11 2014 Lucas Merlette
-##
-
 NAME	= epil
 GCC	= g++
 RM	= rm -f
-OBJS	= $(SRCS:.cpp=.o)
-SRCS_P	= sources/
-MAIN_P	= main/
-SRCS	= $(MAIN_P)main.cpp	\
-	$(SRCS_P)Epil.cpp	\
-	$(SRCS_P)Modules/BlockList.cpp \
-	$(SRCS_P)Modules/Workspace.cpp \
-	$(SRCS_P)Modules/Hair/Profile.cpp \
-	$(SRCS_P)System/Action.cpp \
-	$(SRCS_P)System/ActionWrite.cpp
-INC_P	= -Iheaders/
-INC	= $(INC_P) \
-	$(INC_P)Modules \
-	$(INC_P)Modules/Hair \
-	$(INC_P)Modules/Shave \
-	$(INC_P)System
+
 CFLAGS	= -W -Wall -Wextra -Werror -std=c++0x
+INC_P	= . Modules Modules/Actions Utils
+INC	= $(foreach d, $(INC_P), -Iheaders/$d)
+
+SRCS	= $(shell find src/ \( -iname "*.cpp" \))
+OBJS	= $(subst src,obj,$(SRCS:.cpp=.o))
 
 all	: $(NAME)
 $(NAME)	: $(OBJS)
-	$(GCC) $(INC) $(OBJS) -o $(NAME) $(CFLAGS)
-%.o	: %.cpp
-	$(GCC) -c $(INC) $(CFLAGS) -o $@ $<
+	$(GCC) -o $@ $^
+obj/%.o	: src/%.cpp
+	$(GCC) $(CFLAGS) $(INC) -o $@ -c $<
 clean	:
 	$(RM) $(OBJS)
 fclean	: clean

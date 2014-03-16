@@ -11,7 +11,7 @@
 #include  "Profile.hh"
 
 using namespace	epil;
-using namespace	hair;
+using namespace utils;
 
 Profile::Profile()
 {
@@ -22,9 +22,18 @@ Profile::Profile(std::string const &id)
 {
 }
 
+/**
+ * Getters and setters
+ */
 void  Profile::setId(std::string const &id)
 {
   this->_id = id;
+}
+std::string const   &Profile::getId()
+{
+  if (!this->_id.empty())
+    return (this->_id);
+  throw new std::exception();
 }
 
 Profile &Profile::setAction(Action *new_action)
@@ -33,43 +42,28 @@ Profile &Profile::setAction(Action *new_action)
 
   return (*this);
 }
-
 std::list<Action*>  &Profile::getActionList()
 {
   return (this->_actionList);
 }
+//-----
 
-std::string const   &Profile::getId()
-{
-  if (!this->_id.empty())
-    return (this->_id);
-  throw new std::exception();
-}
-
+/**
+ * Action order functions
+ */
 void  Profile::changeActionOrder(std::string const &first_id, std::string const &second_id)
 {
   ActionWrite *first_action = NULL;
   ActionWrite *second_action = NULL;
 
-  hair::Console::nlog("first_id = <"+first_id+">");
-  hair::Console::nlog("second_id = <"+second_id+">");
   for (std::list<Action*>::iterator it = this->_actionList.begin(); it != _actionList.end(); ++it)
   {
-    hair::Console::nlog("getId() = <"+(*it)->getId()+">");
     if (!(*it)->getId().compare(first_id))
     {
       if ((first_action = dynamic_cast<ActionWrite*>(*it)) == 0)
-	{
-	  // if ((first_action = dynamic_cast<epil::ActionCompile*>(*it)) == 0)
-	  //   {
-	  //     if ((first_action = dynamic_cast<epil::ActionExec*>(*it)) == 0)
-	  // 	{
-	  hair::Console::nlog("FAIL WITH DYNAMIC_CASTS");
-	    // 	}
-	    // }
-	}
+	Console::nlog("FAIL WITH FIRST DYNAMIC_CAST");
       else
-	hair::Console::nlog("IT IS ACTIONWRITE");
+	Console::nlog("IT IS ACTIONWRITE");
       if (second_action != NULL)
         break;
       else
@@ -77,19 +71,10 @@ void  Profile::changeActionOrder(std::string const &first_id, std::string const 
     }
     if ((*it)->getId() == second_id)
     {
-      // second_action = *it;
-      if ((second_action = dynamic_cast<epil::ActionWrite*>(*it)) == 0)
-	{
-	  // if ((second_action = dynamic_cast<epil::ActionCompile*>(*it)) == 0)
-	  //   {
-	  //     if ((second_action = dynamic_cast<epil::ActionExec*>(*it)) == 0)
-	  // 	{
-	  hair::Console::nlog("FAIL WITH DYNAMIC_CASTS");
-	    // 	}
-	    // }
-	}
+      if ((second_action = dynamic_cast<ActionWrite*>(*it)) == 0)
+	Console::nlog("FAIL WITH SECOND DYNAMIC_CAST");
       else
-	hair::Console::nlog("IT IS ACTIONWRITE");
+	Console::nlog("IT IS ACTIONWRITE");
       if (first_action != NULL)
         break;
       else
@@ -98,17 +83,17 @@ void  Profile::changeActionOrder(std::string const &first_id, std::string const 
   }
   if (first_action != NULL && second_action != NULL)
   {
-    hair::Console::nlog("SWAPPING ORDERS");
+    Console::nlog("SWAPPING ORDERS");
     std::iter_swap(first_action, second_action);
   }
   else
-    hair::Console::nlog("NOT SWAPPING ORDERS");
+    Console::nlog("NOT SWAPPING ORDERS");
 }
-
 void  Profile::revertActionOrder()
 {
-  // this->_actionList.reverse();
+  this->_actionList.reverse();
 }
+//-----
 
 bool	Profile::isComplete()
 {
@@ -131,9 +116,10 @@ Profile::~Profile()
   std::cout << "===================" << std::endl;
   std::cout << "In Profile Dtor" << std::endl;
   this->_id.clear();
-  // for (std::list<Action*>::iterator it = this->_actionList.begin();
-  //   it != this->_actionList.end(); ++it)
-  //   delete it;
+  for (std::list<Action*>::iterator it = this->_actionList.begin(); it != this->_actionList.end(); ++it)
+    {
+      delete *it;
+    }
   std::cout << "Profile successfully cleared" << std::endl;
   std::cout << "===================" << std::endl;
 }

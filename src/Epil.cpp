@@ -17,17 +17,7 @@ Epil::Epil()
 {
 }
 
-void	Epil::setWorkspace(std::string const &workspace_path)
-{
-  (void)workspace_path;
-  if (this->_workspace == NULL)
-    {
-      this->_workspace = new Workspace();
-      this->_workspace->set_wd(get_current_dir_name());
-    }
-}
-
-void	Epil::loadProfile(hair::Profile *profile)
+void	Epil::loadProfile(Profile *profile)
 {
   if (profile->isComplete())
     this->_profileList.push_back(profile);
@@ -38,13 +28,13 @@ void	Epil::loadProfile(hair::Profile *profile)
 
 void	Epil::useProfile(std::string const &id)
 {
-  for (std::list<hair::Profile*>::iterator it = this->_profileList.begin();
+  for (std::list<Profile*>::iterator it = this->_profileList.begin();
        it != this->_profileList.end(); ++it)
     {
       if (!id.compare((*it)->getId()))
 	{
 	  (*it)->apply();
-	  hair::Console::nlog("Profile found = "+(*it)->getId());
+	  utils::Console::nlog("Profile found = "+(*it)->getId());
 	}
     }
 }
@@ -54,7 +44,7 @@ void	Epil::wr_setDst(std::string const &dst_file, BlockList const &block)
   if (!this->_dst_set)
     {
       std::cout << "Loading file <"+dst_file+">...\t";
-      if (shave::FileSystem::isfile(dst_file))
+      if (utils::FileSystem::isfile(dst_file))
 	{
 	  this->_dst_file	= dst_file;
 	  this->_dst_block	= block;
@@ -77,7 +67,7 @@ void	Epil::wr_setSrc(std::string const &src_file, BlockList const &block)
   if (!this->_src_set)
     {
       std::cout << "Loading file <"+src_file+">...\t";
-      if (shave::FileSystem::isfile(src_file))
+      if (utils::FileSystem::isfile(src_file))
 	{
 	  this->_src_file	= src_file;
 	  this->_src_block	= block;
