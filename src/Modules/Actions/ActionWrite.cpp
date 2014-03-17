@@ -65,7 +65,7 @@ void ActionWrite::apply()
   std::ifstream dst_file(this->_src_file);
   std::ifstream src_file(this->_dst_file);
   std::ofstream outfile(this->_new_dst_file);
-  char line[256];
+  // char line[256];
 
   // for ( ; nbline != block.first && dst_file.good() && src_file.good(); ++nbline)
   // {
@@ -75,8 +75,24 @@ void ActionWrite::apply()
   //   outfile.write(tmp_line, 256);
   // }
   utils::FileSystem::write_until(4, dst_file, outfile);
-  dst_file.getline(line, 256);
-  utils::Console::nlog("line = "+std::string(line));
+  utils::FileSystem::ifstream_goto(5, dst_file);
+  utils::FileSystem::ifstream_goto(4, src_file);
+  utils::FileSystem::write_until(5, src_file, outfile);
+  std::cout << "dst_file.eof() = " << dst_file.eof() << std::endl;
+  utils::FileSystem::write_until(dst_file.eof(), dst_file, outfile);
+  // dst_file.getline(line, 256);
+  // utils::Console::nlog("line = "+std::string(line));
+
+  // for (size_t cur_line = 5; cur_line < 5 && infile.good() && outfile.good(); ++cur_line)
+  // {
+  //   infile.getline(line, 256);
+  //   outfile.write(line, strlen(line));
+  //   if (infile.seekg(infile.tellg() - static_cast<std::streampos>(1)) && infile.get() == '\n')
+  //     outfile.write("\n", 1);
+  //   Console::nlog("line #"+std::to_string(cur_line)+" = "+line);
+  // }
+
+
   // if (dst_file.is_open() && src_file.is_open() && outfile.is_open())
   // {
   //   for (unsigned int nbline = 0; dst_file.good() && src_file.good() && outfile.good(); ++nbline)

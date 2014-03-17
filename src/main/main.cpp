@@ -14,16 +14,16 @@ void  set_profile(std::string const &id, epil::Epil *epil)
   profile->setAction(wr_action);
 
   // creating another ActionWrite ---------------
-  epil::ActionWrite *wr_action_bis = new epil::ActionWrite("wr_action_bis");
-  wr_action_bis->wr_setDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)));
-  wr_action_bis->wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
-  profile->setAction(wr_action_bis);
+  // epil::ActionWrite *wr_action_bis = new epil::ActionWrite("wr_action_bis");
+  // wr_action_bis->wr_setDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)));
+  // wr_action_bis->wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
+  // profile->setAction(wr_action_bis);
 
-  // creating another ActionWrite ---------------
-  epil::ActionWrite *wr_action_ter = new epil::ActionWrite("wr_action_ter");
-  wr_action_ter->wr_setDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)));
-  wr_action_ter->wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
-  profile->setAction(wr_action_ter);
+  // // creating another ActionWrite ---------------
+  // epil::ActionWrite *wr_action_ter = new epil::ActionWrite("wr_action_ter");
+  // wr_action_ter->wr_setDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)));
+  // wr_action_ter->wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
+  // profile->setAction(wr_action_ter);
 
   epil::utils::Console::log("Action = <");
   for (std::list<epil::Action*>::iterator it = profile->getActionList().begin(); it != profile->getActionList().end(); ++it)
