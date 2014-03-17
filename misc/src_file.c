@@ -1,6 +1,6 @@
 int	main(int ac, char **av)
 {
-  int	z = -3;
+  int	z = 0;
 
   printf("z = %d\n", z);
   z = z * (2 * z);
@@ -8,5 +8,6 @@ int	main(int ac, char **av)
     write(1, &z, 1);
   else
     printf("z < 0\n");
+  printf("End of main\n");
   exit(EXIT_SUCCESS);
 }

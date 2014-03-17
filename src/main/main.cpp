@@ -9,7 +9,8 @@ void  set_profile(std::string const &id, epil::Epil *epil)
 
   // creating an ActionWrite --------------------
   epil::ActionWrite *wr_action = new epil::ActionWrite("wr_action");
-  wr_action->wr_setDst("misc/dst_file.c", new epil::BlockList(std::make_pair(1, 8)));
+  std::pair<int, int> my_pair[] = {std::make_pair(6, 13), std::make_pair(4, 2), std::make_pair(28, 11)};
+  wr_action->wr_setDst("misc/dst_file.c", new epil::BlockList(std::list<std::pair<int, int> >(my_pair, my_pair + sizeof(my_pair) / sizeof(std::pair<int, int>))));
   wr_action->wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
   profile->setAction(wr_action);
 
