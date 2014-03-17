@@ -11,9 +11,12 @@
 #ifndef		EPIL_MODULES_ACTIONS_ACTIONWRITE_HH_
 # define	EPIL_MODULES_ACTIONS_ACTIONWRITE_HH_
 
-# include	<iostream>
-# include	<fstream>
-# include	<string>
+# include   <cstring>
+# include   <stdlib.h>
+
+# include   <iostream>
+# include   <fstream>
+# include   <string>
 
 # include	"Action.hh"
 # include	"BlockList.hh"
@@ -56,6 +59,8 @@ namespace	epil
 
     std::string _dst_file;
     std::string _src_file;
+    
+    std::string _new_dst_file;
 
     BlockList   *_dst_block;
     BlockList   *_src_block;

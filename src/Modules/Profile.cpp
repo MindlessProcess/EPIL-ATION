@@ -108,7 +108,7 @@ void	Profile::apply()
       Console::nlog("action <"+(*it)->getId()+"> apply()");
       (*it)->apply();
     }
-  Console::nlog("====In Profile::apply()=====");
+  Console::nlog("====Out of Profile::apply()=====");
 }
 
 Profile::~Profile()

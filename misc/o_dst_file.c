@@ -1,6 +1,6 @@
 int	main(int ac, char **av)
 {
-  int	z = -3;
+  int	z = 0;
 
   printf("z = %d\n", z);
   z = z * (2 * z);
