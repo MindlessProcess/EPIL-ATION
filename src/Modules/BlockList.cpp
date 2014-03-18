@@ -5,7 +5,7 @@
 // Login   <lucas@epitech.net>
 // 
 // Started on  Mon Feb 24 23:39:40 2014 Lucas Merlette
-// Last update Tue Mar 18 11:43:49 2014 Lyoma Guillou
+// Last update Tue Mar 18 12:00:24 2014 Lyoma Guillou
 //
 
 #include	"BlockList.hh"
@@ -203,18 +203,33 @@ std::list<std::pair<int, int> >	BlockList::getList() const
   return this->_list;
 }
 
-// void	Blocklist::_merge_list()
-// {
-//   std::list<std::pair<int, int> >::iterator	it;
+void	BlockList::_merge_list()
+{
+  std::list<std::pair<int, int> >::iterator	it;
+  std::list<std::pair<int, int> >::iterator	nx;
+  bool						flag;
 
-//   for (it = this->_list.begin(); it != this->_list.end(); ++it)
-//     {
-
-//     }
-// }
+  for (it = this->_list.begin(); it != this->_list.end(); ++it)
+    {
+      nx = it;
+      if (it != this->_list.end())
+	++nx;
+      if (true == flag)
+	{
+	  it = this->_list.begin();
+	  flag = false;
+	}
+      if (std::get<1>(*it) > std::get<0>(*nx))
+	{
+	  *it = std::make_pair(std::get<0>(*it), std::get<1>(*nx));
+	  it = this->_list.erase(nx);
+	  flag = true;
+	}
+    }
+}
 
 void	BlockList::_sort_list()
 {
   this->_list.sort();
-  //  this->_merge_list();
+  this->_merge_list();
 }

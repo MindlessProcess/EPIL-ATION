@@ -26,7 +26,7 @@ namespace	epil
     int					_anti;
     std::list<std::pair<int, int> >	_list;
 
-    //    void				_merge_list();
+    void				_merge_list();
     void				_sort_list();
   };  
 };
