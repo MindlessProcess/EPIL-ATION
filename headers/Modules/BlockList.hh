@@ -10,9 +10,6 @@ namespace	epil
 {
   class		BlockList
   {
-    int					_anti;
-    std::list<std::pair<int, int> >	_list;
-
   public:
     BlockList(int anti = -1);
     BlockList(std::pair<int, int> pair, int anti = -1);
@@ -24,7 +21,14 @@ namespace	epil
 
     int						getAnti() const;
     std::list<std::pair<int, int> >		getList() const;
-  };
+
+  private:
+    int					_anti;
+    std::list<std::pair<int, int> >	_list;
+
+    //    void				_merge_list();
+    void				_sort_list();
+  };  
 };
 
 #endif		/* !EPIL_MODULES_BLOCKLIST_HH_ */

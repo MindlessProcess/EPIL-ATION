@@ -5,24 +5,24 @@
 // Login   <lucas@epitech.net>
 // 
 // Started on  Mon Feb 24 23:39:40 2014 Lucas Merlette
-// Last update Sun Mar  2 15:14:11 2014 Lyoma Guillou
+// Last update Tue Mar 18 11:43:49 2014 Lyoma Guillou
 //
 
 #include	"BlockList.hh"
 
 using namespace	epil;
 
-inline bool	pos_pair(std::pair<int, int> pair)
+static inline bool	pos_pair(std::pair<int, int> pair)
 {
   return (0 <= std::get<0>(pair) && 0 <= std::get<1>(pair));
 }
 
-inline bool	dsc_pair(std::pair<int, int> pair)
+static inline bool	dsc_pair(std::pair<int, int> pair)
 {
   return (std::get<0>(pair) > std::get<1>(pair));
 }
 
-inline std::pair<int, int>	swap_pair(std::pair<int, int> pair)
+static inline std::pair<int, int>	swap_pair(std::pair<int, int> pair)
 {
   return (std::make_pair(std::get<1>(pair), std::get<0>(pair)));
 }
@@ -44,22 +44,22 @@ BlockList::BlockList(std::pair<int, int> pair, int anti)
     }
 }
 
-inline bool	asc_bound(std::pair<int, int> p1, std::pair<int, int> p2)
+static inline bool	asc_bound(std::pair<int, int> p1, std::pair<int, int> p2)
 {
   return (std::get<1>(p2) < std::get<1>(p1));
 }
 
-inline bool	dsc_bound(std::pair<int, int> p1, std::pair<int, int> p2)
+static inline bool	dsc_bound(std::pair<int, int> p1, std::pair<int, int> p2)
 {
   return (std::get<0>(p2) > std::get<0>(p1));
 }
 
-inline std::pair<int, int>	low_bound(std::pair<int, int> p1, std::pair<int, int> p2)
+static inline std::pair<int, int>	low_bound(std::pair<int, int> p1, std::pair<int, int> p2)
 {
   return (std::make_pair(std::get<0>(p1), std::get<0>(p2) - 1));
 }
 
-inline std::pair<int, int>	high_bound(std::pair<int, int> p1, std::pair<int, int> p2)
+static inline std::pair<int, int>	high_bound(std::pair<int, int> p1, std::pair<int, int> p2)
 {
   return (std::make_pair(std::get<1>(p2) + 1, std::get<1>(p1)));
 }
@@ -84,6 +84,7 @@ BlockList::BlockList(std::pair<int, int> pair, std::pair<int, int> anti_pair, in
       else
 	_list.push_back(tp);
     }
+  this->_sort_list();
 }
 
 BlockList::BlockList(std::list<std::pair<int, int> > list, int anti)
@@ -108,6 +109,7 @@ BlockList::BlockList(std::list<std::pair<int, int> > list, int anti)
 	}
       this->_list = tl;
     }
+  this->_sort_list();
 }
 
 BlockList::BlockList(std::list<std::pair<int, int> > list, std::pair<int, int> anti_pair, int anti)
@@ -142,6 +144,7 @@ BlockList::BlockList(std::list<std::pair<int, int> > list, std::pair<int, int> a
 	}
       this->_list = tl;
     }
+  this->_sort_list();
 }
 
 BlockList::BlockList(std::list<std::pair<int, int> > list, std::list<std::pair<int, int> > alist, int anti)
@@ -185,6 +188,7 @@ BlockList::BlockList(std::list<std::pair<int, int> > list, std::list<std::pair<i
 	}
       this->_list = tl;
     }
+  this->_sort_list();
 }
 
 BlockList::~BlockList() {}
@@ -194,7 +198,23 @@ int	BlockList::getAnti() const
   return this->_anti;
 }
 
-std::list<std::pair<int, int>>	BlockList::getList() const
+std::list<std::pair<int, int> >	BlockList::getList() const
 {
   return this->_list;
+}
+
+// void	Blocklist::_merge_list()
+// {
+//   std::list<std::pair<int, int> >::iterator	it;
+
+//   for (it = this->_list.begin(); it != this->_list.end(); ++it)
+//     {
+
+//     }
+// }
+
+void	BlockList::_sort_list()
+{
+  this->_list.sort();
+  //  this->_merge_list();
 }
