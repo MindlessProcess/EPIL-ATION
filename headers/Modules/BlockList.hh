@@ -11,19 +11,17 @@ namespace	epil
   class		BlockList
   {
   public:
-    BlockList(int anti = -1);
-    BlockList(std::pair<int, int> pair, int anti = -1);
-    BlockList(std::pair<int, int> pair, std::pair<int, int> anti_pair, int anti = -1);
-    BlockList(std::list<std::pair<int, int> > list, int anti = -1);
-    BlockList(std::list<std::pair<int, int> > list, std::pair<int, int> anti_pair, int anti = -1);
-    BlockList(std::list<std::pair<int, int> > list, std::list<std::pair<int, int> > alist, int anti = -1);
+    BlockList();
+    BlockList(std::pair<int, int> pair);
+    BlockList(std::pair<int, int> pair, std::pair<int, int> anti_pair);
+    BlockList(std::list<std::pair<int, int> > list);
+    BlockList(std::list<std::pair<int, int> > list, std::pair<int, int> anti_pair);
+    BlockList(std::list<std::pair<int, int> > list, std::list<std::pair<int, int> > alist);
     ~BlockList();
 
-    int						getAnti() const;
     std::list<std::pair<int, int> >		getList() const;
 
   private:
-    int					_anti;
     std::list<std::pair<int, int> >	_list;
 
     void				_merge_list();

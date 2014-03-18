@@ -5,8 +5,10 @@
 // Login   <lucas@epitech.net>
 // 
 // Started on  Mon Feb 24 23:39:40 2014 Lucas Merlette
-// Last update Tue Mar 18 14:08:10 2014 Lyoma Guillou
+// Last update Tue Mar 18 18:12:47 2014 Lyoma Guillou
 //
+
+#include <iostream>
 
 #include	"BlockList.hh"
 
@@ -27,14 +29,12 @@ static inline std::pair<int, int>	swap_pair(std::pair<int, int> pair)
   return (std::make_pair(std::get<1>(pair), std::get<0>(pair)));
 }
 
-BlockList::BlockList(int anti)
+BlockList::BlockList()
 {
-  this->_anti = (0 > anti) ? -1 : anti;
 }
 
-BlockList::BlockList(std::pair<int, int> pair, int anti)
+BlockList::BlockList(std::pair<int, int> pair)
 {
-  this->_anti = (0 > anti) ? -1 : anti;
   if (pos_pair(pair))
     {
       if (dsc_pair(pair))
@@ -64,9 +64,8 @@ static inline std::pair<int, int>	high_bound(std::pair<int, int> p1, std::pair<i
   return (std::make_pair(std::get<1>(p2) + 1, std::get<1>(p1)));
 }
 
-BlockList::BlockList(std::pair<int, int> pair, std::pair<int, int> anti_pair, int anti)
+BlockList::BlockList(std::pair<int, int> pair, std::pair<int, int> anti_pair)
 {
-  this->_anti = (0 > anti) ? -1 : anti;
   if (pos_pair(pair) && pos_pair(anti_pair))
     {
       std::pair<int, int>	tp;
@@ -83,17 +82,16 @@ BlockList::BlockList(std::pair<int, int> pair, std::pair<int, int> anti_pair, in
 	}
       else
 	_list.push_back(tp);
+      this->_sort_list();
     }
-  this->_sort_list();
 }
 
-BlockList::BlockList(std::list<std::pair<int, int> > list, int anti)
+BlockList::BlockList(std::list<std::pair<int, int> > list)
 {
   std::list<std::pair<int, int> >		tl;
   std::list<std::pair<int, int> >::iterator	it;
   std::pair<int, int>				tp;
 
-  this->_anti = (0 > anti) ? -1 : anti;
   if (!list.empty())
     {
       for (it = list.begin(); it != list.end(); ++it)
@@ -108,18 +106,17 @@ BlockList::BlockList(std::list<std::pair<int, int> > list, int anti)
 	    }
 	}
       this->_list = tl;
+      this->_sort_list();
     }
-  this->_sort_list();
 }
 
-BlockList::BlockList(std::list<std::pair<int, int> > list, std::pair<int, int> anti_pair, int anti)
+BlockList::BlockList(std::list<std::pair<int, int> > list, std::pair<int, int> anti_pair)
 {
   std::list<std::pair<int, int> >		tl;
   std::list<std::pair<int, int> >::iterator	it;
   std::pair<int, int>				tp;
   std::pair<int, int>				ta;
 
-  this->_anti = (0 > anti) ? -1 : anti;
   if (!list.empty())
     {
       ta = std::make_pair(-1, -1);
@@ -143,11 +140,11 @@ BlockList::BlockList(std::list<std::pair<int, int> > list, std::pair<int, int> a
 	    }
 	}
       this->_list = tl;
+      this->_sort_list();
     }
-  this->_sort_list();
 }
 
-BlockList::BlockList(std::list<std::pair<int, int> > list, std::list<std::pair<int, int> > alist, int anti)
+BlockList::BlockList(std::list<std::pair<int, int> > list, std::list<std::pair<int, int> > alist)
 {
   std::list<std::pair<int, int> >		tl;
   std::list<std::pair<int, int> >::iterator	it;
@@ -155,7 +152,6 @@ BlockList::BlockList(std::list<std::pair<int, int> > list, std::list<std::pair<i
   std::pair<int, int>				tp;
   bool						flag = false;
 
-  this->_anti = (0 > anti) ? -1 : anti;
   if (!list.empty())
     {
       for (it = list.begin(); it != list.end(); ++it)
@@ -187,16 +183,11 @@ BlockList::BlockList(std::list<std::pair<int, int> > list, std::list<std::pair<i
 	    }
 	}
       this->_list = tl;
+      this->_sort_list();
     }
-  this->_sort_list();
 }
 
 BlockList::~BlockList() {}
-
-int	BlockList::getAnti() const
-{
-  return this->_anti;
-}
 
 std::list<std::pair<int, int> >	BlockList::getList() const
 {
@@ -207,7 +198,7 @@ void	BlockList::_merge_list()
 {
   std::list<std::pair<int, int> >::iterator	it;
   std::list<std::pair<int, int> >::iterator	nx;
-  bool						flag;
+  bool						flag = false;
 
   for (it = this->_list.begin(); it != this->_list.end(); ++it)
     {
@@ -219,7 +210,7 @@ void	BlockList::_merge_list()
       nx = it;
       if (it != this->_list.end())
 	++nx;
-      if (std::get<1>(*it) > std::get<0>(*nx))
+      if (nx != this->_list.end() && std::get<1>(*it) >= (std::get<0>(*nx) - 1))
 	{
 	  *it = std::make_pair(std::get<0>(*it), std::get<1>(*nx));
 	  this->_list.erase(nx);
@@ -230,6 +221,9 @@ void	BlockList::_merge_list()
 
 void	BlockList::_sort_list()
 {
-  this->_list.sort();
-  this->_merge_list();
+  if (!this->_list.empty())
+    {
+      this->_list.sort();
+      this->_merge_list();
+    }
 }
