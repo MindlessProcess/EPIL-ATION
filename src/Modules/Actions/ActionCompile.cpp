@@ -5,7 +5,7 @@
 // Login   <guillo_e@epitech.net>
 // 
 // Started on  Sat Mar  8 14:39:47 2014 Lyoma Guillou
-// Last update Tue Mar 11 11:38:33 2014 Lyoma Guillou
+// Last update Tue Mar 18 14:07:47 2014 Lyoma Guillou
 //
 
 #include	<unistd.h>
@@ -74,7 +74,6 @@ inline bool	ActionCompile::_changeDir()
 
 void		ActionCompile::_format_path()
 {
-  // char		*path;
   unsigned	pos;
 
   if (std::string::npos != this->_path.find("~"))

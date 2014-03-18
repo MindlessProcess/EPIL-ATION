@@ -5,7 +5,7 @@
 // Login   <lucas@epitech.net>
 // 
 // Started on  Mon Feb 24 23:39:40 2014 Lucas Merlette
-// Last update Tue Mar 18 13:27:31 2014 Lyoma Guillou
+// Last update Tue Mar 18 14:08:10 2014 Lyoma Guillou
 //
 
 #include	"BlockList.hh"
@@ -221,8 +221,6 @@ void	BlockList::_merge_list()
 	++nx;
       if (std::get<1>(*it) > std::get<0>(*nx))
 	{
-	  // condition is not needed because iterator is set back to beginning
-	  //	  if (std::get<1>(*it) < std::get<1>(*nx))
 	  *it = std::make_pair(std::get<0>(*it), std::get<1>(*nx));
 	  this->_list.erase(nx);
 	  flag = true;
