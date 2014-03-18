@@ -54,57 +54,59 @@ namespace utils
       return (access(name.c_str(), R_OK | W_OK | X_OK) == 0);
     }
 
-    static inline bool write_until(std::streampos line_pos, std::ifstream &infile, std::ofstream &outfile)
+    static inline std::streampos write_until(std::streampos line_pos, std::ifstream &infile, std::ofstream &outfile)
     {
-      Console::nlog("====In write_until()====");
-      Console::nlog("line_pos = "+std::to_string(line_pos));
+      Console::nlog("  ====In write_until(line_pos = "+std::to_string(line_pos)+")====");
+      // Console::nlog("line_pos = "+std::to_string(line_pos));
       std::streampos orig_pos = infile.tellg();
       if (!infile.is_open() || !outfile.is_open() || (infile.seekg(0, infile.end) && line_pos > infile.tellg()))
       {
         Console::nlog("This is FALSE !");
-        return (false);
+        return (0);
       }
       else if (!line_pos)
         line_pos = infile.tellg() + static_cast<std::streampos>(1);
-      Console::nlog("line_pos = "+std::to_string(line_pos));
+      // Console::nlog("line_pos = "+std::to_string(line_pos));
  
       infile.seekg(orig_pos);
       char stream_line[STREAM_GETLINE_SIZE];
-      for (int cur_line = 0; cur_line < line_pos && infile.good() && outfile.good(); ++cur_line)
+      int cur_line;
+      for (cur_line = 1; cur_line < line_pos && infile.good() && outfile.good(); ++cur_line)
       {
         infile.getline(stream_line, STREAM_GETLINE_SIZE);
         outfile.write(stream_line, strlen(stream_line));
         if (infile.seekg(infile.tellg() - static_cast<std::streampos>(1)) && infile.get() == '\n')
           outfile.write("\n", 1);
-        Console::nlog("stream_line #"+std::to_string(cur_line)+" = "+stream_line);
+        Console::nlog("\tstream_line #"+std::to_string(cur_line)+" = "+stream_line);
       }
 
-      Console::nlog("This is TRUE !");
-      Console::nlog("====Out of write_until()====");
-      return (true);
+      // Console::nlog("This is TRUE !");
+      Console::nlog("  ====Out of write_until()====");
+      return (--cur_line);
     }
 
-    static inline bool ifstream_goto(std::streampos line_pos, std::ifstream &infile)
+    static inline std::streampos ifstream_goto(std::streampos line_pos, std::ifstream &infile)
     {
-      Console::nlog("====In ifstream_goto()====");
+      Console::nlog("  ====In ifstream_goto(line_pos = "+std::to_string(line_pos)+")====");
       std::streampos orig_pos = infile.tellg();
       if (!infile.is_open() || !line_pos || (infile.seekg(0, infile.end) && line_pos > infile.tellg()))
       {
         Console::nlog("This is FALSE !");
-        return (false);
+        return (0);
       }
 
       infile.seekg(orig_pos);
       char stream_line[STREAM_GETLINE_SIZE];
-      for (int cur_line = 0; cur_line < line_pos && infile.good(); ++cur_line)
+      int cur_line = 1;
+      for (cur_line = 1; cur_line < line_pos && infile.good(); ++cur_line)
       {
         infile.getline(stream_line, STREAM_GETLINE_SIZE);
-        Console::nlog("stream_line #"+std::to_string(cur_line)+" = "+stream_line);
+        Console::nlog("\tstream_line #"+std::to_string(cur_line)+" = "+stream_line);
       }
 
-      Console::nlog("This is TRUE !");
-      Console::nlog("====Out of ifstream_goto()====");
-      return (true);
+      // Console::nlog("This is TRUE !");
+      Console::nlog("  ====Out of ifstream_goto()====");
+      return (--cur_line);
     }
     // static inline bool ofstream_goto(std::streampos line_pos, std::ofstream &outfile)
     // {

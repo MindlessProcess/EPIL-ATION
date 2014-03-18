@@ -14,6 +14,7 @@ using namespace	epil;
 using namespace utils;
 
 Profile::Profile()
+  : _id("")
 {
 }
 
@@ -31,9 +32,7 @@ void  Profile::setId(std::string const &id)
 }
 std::string const   &Profile::getId()
 {
-  if (!this->_id.empty())
-    return (this->_id);
-  throw new std::exception();
+  return (this->_id);
 }
 
 Profile &Profile::setAction(Action *new_action)
@@ -61,9 +60,9 @@ void  Profile::changeActionOrder(std::string const &first_id, std::string const 
     if (!(*it)->getId().compare(first_id))
     {
       if ((first_action = dynamic_cast<ActionWrite*>(*it)) == 0)
-	Console::nlog("FAIL WITH FIRST DYNAMIC_CAST");
+        Console::nlog("FAIL WITH FIRST DYNAMIC_CAST");
       else
-	Console::nlog("IT IS ACTIONWRITE");
+        Console::nlog("IT IS ACTIONWRITE");
       if (second_action != NULL)
         break;
       else
@@ -72,9 +71,9 @@ void  Profile::changeActionOrder(std::string const &first_id, std::string const 
     if ((*it)->getId() == second_id)
     {
       if ((second_action = dynamic_cast<ActionWrite*>(*it)) == 0)
-	Console::nlog("FAIL WITH SECOND DYNAMIC_CAST");
+        Console::nlog("FAIL WITH SECOND DYNAMIC_CAST");
       else
-	Console::nlog("IT IS ACTIONWRITE");
+        Console::nlog("IT IS ACTIONWRITE");
       if (first_action != NULL)
         break;
       else
@@ -104,10 +103,10 @@ void	Profile::apply()
 {
   Console::nlog("====In Profile::apply()=====");
   for (std::list<Action*>::iterator it = this->_actionList.begin(); it != this->_actionList.end(); ++it)
-    {
-      Console::nlog("action <"+(*it)->getId()+"> apply()");
-      (*it)->apply();
-    }
+  {
+    Console::nlog("action <"+(*it)->getId()+"> apply()");
+    (*it)->apply();
+  }
   Console::nlog("====Out of Profile::apply()=====");
 }
 
@@ -117,9 +116,9 @@ Profile::~Profile()
   std::cout << "In Profile Dtor" << std::endl;
   this->_id.clear();
   for (std::list<Action*>::iterator it = this->_actionList.begin(); it != this->_actionList.end(); ++it)
-    {
-      delete *it;
-    }
+  {
+    delete *it;
+  }
   std::cout << "Profile successfully cleared" << std::endl;
   std::cout << "===================" << std::endl;
 }

@@ -9,9 +9,21 @@ void  set_profile(std::string const &id, epil::Epil *epil)
 
   // creating an ActionWrite --------------------
   epil::ActionWrite *wr_action = new epil::ActionWrite("wr_action");
-  std::pair<int, int> my_pair[] = {std::make_pair(6, 13), std::make_pair(4, 2), std::make_pair(28, 11)};
-  wr_action->wr_setDst("misc/dst_file.c", new epil::BlockList(std::list<std::pair<int, int> >(my_pair, my_pair + sizeof(my_pair) / sizeof(std::pair<int, int>))));
-  wr_action->wr_setSrc("misc/src_file.c", new epil::BlockList(std::make_pair(3, 5)));
+  std::pair<int, int> my_dst_pair[] =
+    {
+      std::make_pair(5, 10),
+      std::make_pair(10, 26),
+      std::make_pair(28, 29)
+    };
+  wr_action->wr_setElem(epil::filetype::DST, "misc/dst_file.txt", new epil::BlockList(std::list<std::pair<int, int> >(my_dst_pair, my_dst_pair + sizeof(my_dst_pair) / sizeof(std::pair<int, int>))));
+
+  std::pair<int, int> my_src_pair[] =
+    {
+      std::make_pair(3, 6),
+      std::make_pair(11, 22),
+      std::make_pair(24, 24)
+    };
+  wr_action->wr_setElem(epil::filetype::SRC, "misc/src_file.txt", new epil::BlockList(std::list<std::pair<int, int> >(my_src_pair, my_src_pair + sizeof(my_src_pair) / sizeof(std::pair<int, int>))));
   profile->setAction(wr_action);
 
   // creating another ActionWrite ---------------

@@ -26,10 +26,18 @@
 
 namespace	epil
 {
-  class		ActionWrite : public Action
+    namespace filetype
+    {
+        enum FileType
+        {
+            DST,
+            SRC
+        };
+    };
+
+  class     ActionWrite : public Action
   {
   public:
-
     // Maybe an empty constructor limits the unpredictable results
     // And it forces the user to setSrc and setDst
     ActionWrite(std::string const &id);
@@ -43,6 +51,7 @@ namespace	epil
 
     ActionWrite &wr_setDst(std::string const&, epil::BlockList*); //DST_FILE, BLOCK
     ActionWrite &wr_setSrc(std::string const&, epil::BlockList*); //SRC_FILE, BLOCK
+    ActionWrite &wr_setElem(filetype::FileType filetype, std::string const&, epil::BlockList*);
     // void wr_addDstBlockList(epil::BlockList const&);
     // void wr_addSrcBlockList(epil::BlockList const&);
     // void wr_run();
