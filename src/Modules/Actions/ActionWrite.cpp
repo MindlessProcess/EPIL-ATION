@@ -45,6 +45,13 @@ ActionWrite &ActionWrite::wr_setElem(filetype::FileType filetype, std::string co
 
 void ActionWrite::apply()
 {
+  if (!this->_dst_set) {
+      throw exceptions::incomplete_action("ActionWrite dst specifier is not set");
+    }
+  else if (!this->_src_set) {
+      throw exceptions::incomplete_action("ActionWrite src specifier is not set");
+    }
+
   utils::Console::nlog("In actionWrite <"+this->getId()+"> apply()");
   std::list<std::pair<int, int> > dst_list = this->_dst_block->getList();
   std::list<std::pair<int, int> > src_list = this->_src_block->getList();
@@ -86,46 +93,27 @@ void ActionWrite::apply()
   }
   dst_cur_line += utils::FileSystem::write_until(dst_cur_line, dst_infile, outfile);
 
-  // for (; dst_it != dst_list.end() && src_it != src_list.end(); ++dst_it && ++src_it)
-  // {
-  //   utils::Console::log("Block.first: <");
-  //   utils::Console::log((*it).first);
-  //   utils::Console::nlog(">");
-
-  //   utils::Console::log("Block.second: <");
-  //   utils::Console::log((*it).second);
-  //   utils::Console::nlog(">");
-  // }
-
-  // for (std::list<std::pair<int, int> >::iterator dst_it = dst_list.begin() && std::list<std::pair<int, int> >::iterator src_it = src_list.begin();
-  //   dst_it != dst_list.end() && src_it != src_list.end(); ++dst_it && ++src_it)
-  // {
-  //   utils::Console::log("Block.first: <");
-  //   utils::Console::log((*it).first);
-  //   utils::Console::nlog(">");
-
-  //   utils::Console::log("Block.second: <");
-  //   utils::Console::log((*it).second);
-  //   utils::Console::nlog(">");
-
-  //   // utils::FileSystem::write_until((*it).first, dst_infile, outfile);
-  //   // utils::FileSystem::ifstream_goto((*it).second, dst_infile);
-  //   // utils::FileSystem::ifstream_goto((*it).first, src_infile);
-  //   // utils::FileSystem::write_until(6, src_infile, outfile);
-  // }
-
-  // utils::FileSystem::write_until(6, dst_infile, outfile);
-  // utils::FileSystem::ifstream_goto(29, dst_infile);
-  // utils::FileSystem::ifstream_goto(9, src_infile);
-  // utils::FileSystem::write_until(13, src_infile, outfile);
-  // std::cout << "dst_file.eof() = " << dst_infile.eof() << std::endl;
-  // utils::FileSystem::write_until(dst_infile.eof(), dst_infile, outfile);
-  // dst_file.getline(line, 256);
-  // utils::Console::nlog("line = "+std::string(line));
-
   dst_infile.close();
   src_infile.close();
   outfile.close();
+
+  //very dirty
+  std::string rename_cmd("mv " + this->_new_dst_file + " " + this->_dst_file);
+  std::hash<std::string> str_hash;
+  std::vector<std::string> file_vector;
+  boost::split(file_vector, this->_dst_file, boost::algorithm::is_any_of("/"));
+  utils::FileSystem::add_extension(file_vector[file_vector.size() - 1], "_" + std::to_string(str_hash(this->_dst_file)));
+  std::string save_cmd("mv " + this->_dst_file + " " + utils::StringOperations::containerToString(file_vector, "/"));
+  for (std::vector<std::string>::iterator it = file_vector.begin(); it != file_vector.end(); ++it)
+    {
+      std::cout << "file_vector= " << *it << std::endl;
+    }
+  // rename_command += this->_new_dst_file + " " + this->_dst_file;
+  std::cout << "SAVE_CMD: " << save_cmd << std::endl;
+  std::cout << "RENAME_CMD: " << rename_cmd << std::endl;
+
+  system(save_cmd.c_str());
+  system(rename_cmd.c_str());
 }
 
 ActionWrite::~ActionWrite()

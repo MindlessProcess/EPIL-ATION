@@ -1,30 +1,26 @@
-//
-// ActionWrite.hh for Epil in /home/seiza/Documents/Git/epil-ation/headers/System
-// 
-// Made by Lyoma Guillou
-// Login   <guillo_e@epitech.net>
-// 
-// Started on  Tue Mar  4 14:12:58 2014 Lyoma Guillou
-// Last update Tue Mar  4 17:10:04 2014 Lyoma Guillou
-//
+#ifndef	EPIL_MODULES_ACTIONS_ACTIONWRITE_HH_
+# define EPIL_MODULES_ACTIONS_ACTIONWRITE_HH_
 
-#ifndef		EPIL_MODULES_ACTIONS_ACTIONWRITE_HH_
-# define	EPIL_MODULES_ACTIONS_ACTIONWRITE_HH_
+# include <cstring>
+# include <stdlib.h>
 
-# include   <cstring>
-# include   <stdlib.h>
+# include <iostream>
+# include <fstream>
+# include <string>
+# include <vector>
 
-# include   <iostream>
-# include   <fstream>
-# include   <string>
+# include <boost/algorithm/string.hpp>
 
-# include	"Action.hh"
-# include	"BlockList.hh"
+# include "Action.hh"
+# include "BlockList.hh"
 
-# include	"FileSystem.hpp"
-# include	"Console.hpp"
+# include "StringOperations.hpp"
+# include "FileSystem.hpp"
+# include "Console.hpp"
 
-namespace	epil
+#include "incomplete_action.hpp"
+
+namespace epil
 {
     namespace filetype
     {
@@ -35,7 +31,7 @@ namespace	epil
         };
     };
 
-  class     ActionWrite : public Action
+  class ActionWrite : public Action
   {
   public:
     // Maybe an empty constructor limits the unpredictable results

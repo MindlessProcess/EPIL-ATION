@@ -76,44 +76,5 @@ int	main()
     // set_profile("SIGSEV", epil);
     epil->useProfile("SIGSEV");
   }
-  std::cout << std::endl;
   return (0);
-
-  // Unit tests on Console.hh
-  {
-    epil::utils::Console::log("Console.log test");
-  }
-  std::cout << std::endl;
-
-  // Unit tests on FileSystem.hpp
-  {
-    std::string file = "README";
-    if (epil::utils::FileSystem::isfile(file))
-    {
-      epil::utils::Console::log(file+" is a file !");
-      if (epil::utils::FileSystem::isreadable(file))
-      {
-        epil::utils::Console::log(file+" is readable !");
-        if (epil::utils::FileSystem::iswritable(file))
-        {
-          epil::utils::Console::log(file+" is writable !");
-          if (epil::utils::FileSystem::isexecutable(file))
-            epil::utils::Console::log(file+" is executable !");
-          else
-            epil::utils::Console::log(std::cerr, file+" is not executable !");
-        }
-        else
-          epil::utils::Console::log(std::cerr, file+" is not writable !");
-      }
-      else
-        epil::utils::Console::log(std::cerr, file+" is not readable !");
-    }
-    else
-      epil::utils::Console::log(std::cerr, file+" is not a file !");
-
-    if (epil::utils::FileSystem::isusable(file))
-      epil::utils::Console::log(file+" is fully usable !");
-    else
-      epil::utils::Console::log(std::cerr, file+" is not fully usable !");
-  }
 }

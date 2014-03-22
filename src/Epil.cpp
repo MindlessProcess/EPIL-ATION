@@ -33,8 +33,15 @@ void	Epil::useProfile(std::string const &id)
     {
       if (!id.compare((*it)->getId()))
 	{
-	  (*it)->apply();
 	  utils::Console::nlog("Profile found = "+(*it)->getId());
+	  try
+	    {
+	      (*it)->apply();
+	    }
+	  catch (exceptions::incomplete_action const &e)
+	    {
+	      utils::Console::nlog(std::cerr, e.what());
+	    }
 	}
     }
 }

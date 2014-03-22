@@ -3,7 +3,7 @@ GCC	= g++
 RM	= rm -f
 
 CFLAGS	= -W -Wall -Wextra -Werror -std=c++0x
-INC_P	= . Modules Modules/Actions Utils
+INC_P	= . Modules Modules/Actions Utils Exceptions
 INC	= $(foreach d, $(INC_P), -Iheaders/$d)
 
 SRCS	= $(shell find src/ \( -iname "*.cpp" \))
