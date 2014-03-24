@@ -6,7 +6,7 @@
 | Summary: |
 ------------
 1. What is Epil ?
-  1.1 A CPP focused library
+  1.1 A C++ focused library
   1.2 Designed for runtime modification
 2. Epil's architecture
   2.1 3 main parts
@@ -22,6 +22,38 @@
   4.2 Exception catcher application
 5. Credits
 
+
+=====================================
+
+
+1. What is Epil ?
+  1.1 A C++ focused library
+    Epil is a C++ static library composed of several classes structured in different sections.
+    The main goal of Epil is a program-inside utilization, to be implemented in an existing program.
+  1.2 Designed for runtime modification
+    Once implemented in one's program, Epil allows the latter to modify itself during runtime.
+    Thus, it permits rewriting, recompiling and rerunning a source code while the programm is running.
+    In other words, Epil grants a human-free control of a program, avoiding runtime errors and halts.
+
+2. Epil's architecture
+  2.1 Three main parts
+    Epil is divided in three main parts, only two being really usable by the program.
+  2.2 The user-interface
+    l
+  2.3 Core and Modules
+    l  
+  2.4 The Utils side
+    l
+3. How-to
+  3.1 Make a program Epil-friendly
+  3.2 Run Epil
+  3.3 Short examples
+4. Applications examples
+  4.1 Signal handling application
+  4.2 Exception catcher application
+5. Credits
+  Epil is developped by Lyoma Guillou and Lucas Merlette since January 2014.
+  It is an Epitech free project of the third year.
 
 
 ===============================================
