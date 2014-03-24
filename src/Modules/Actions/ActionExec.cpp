@@ -83,7 +83,10 @@ void		ActionExec::apply()
       return;
     }
   if (0 == pid && 0 > (execvp(this->_arg[0], this->_arg)))
-    throw exceptions::incomplete_action("Error: Child process could not execute");
+    {
+      throw exceptions::incomplete_action("Error: Child process could not execute");
+      exit(EXIT_FAILURE);
+    }
   else
     wait(0);
 }

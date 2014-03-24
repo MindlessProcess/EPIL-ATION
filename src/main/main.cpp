@@ -34,22 +34,24 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
   std::string		str;
 
   profile->setId(id);
-  if (std::string::npos != id.find("SIGSEGV"))
+  if (id == "SIGSEGV")
     {
       wr_action = new epil::ActionWrite("correct");
 
       std::pair<int, int>	my_dst[]=
-	{
-	  std::make_pair(28, 58),
-	  std::make_pair(79, 81)
-	};
-      wr_action->wr_setElem(epil::filetype::DST, "../src/main/main.cpp", new epil::BlockList(std::list<std::pair<int, int> >(my_dst, my_dst + sizeof(my_dst) / sizeof(std::pair<int, int>))));
+      	{
+      	  std::make_pair(25, 26),
+      	  std::make_pair(31, 59),
+      	  std::make_pair(82, 83)
+      	};
+      wr_action->wr_setElem(epil::filetype::DST, "src/main/main.cpp", new epil::BlockList(std::list<std::pair<int, int> >(my_dst, my_dst + sizeof(my_dst) / sizeof(std::pair<int, int>))));
 
       std::pair<int, int>	my_src[]=
-	{
-	  std::make_pair(28, 43),
-	  std::make_pair(65, 67)
-	};
+      	{
+      	  std::make_pair(25, 27),
+      	  std::make_pair(29, 43),
+      	  std::make_pair(66, 67)
+      	};
       wr_action->wr_setElem(epil::filetype::SRC, "misc/foo.cpp", new epil::BlockList(std::list<std::pair<int, int> >(my_src, my_src + sizeof(my_src) / sizeof(std::pair<int, int>))));
 
       profile->setAction(wr_action);
@@ -77,7 +79,7 @@ int		main(int ac, char **av)
 
   std::cout << "Please select the implementation you want to execute" << std::endl;
   std::cout << "1: Sigint will remake and launch gdb" << std::endl;
-  std::cout << "2: Segfault behavior edit main.cpp" << std::endl;
+  std::cout << "2: Segfault behavior will edit main.cpp" << std::endl;
   std::cin >> arg;
   if ("1" == arg || "2" == arg)
     {
@@ -93,8 +95,11 @@ int		main(int ac, char **av)
 	  std::cout << "Enter 'run' to now execute the Profile" << std::endl;
 	  std::cout << "Or have fun trying to 'kill' it ;)" << std::endl;
 	  std::cin >> arg;
-	} while ("run" != arg || "quit" != arg);
+	} while ("run" != arg && "quit" != arg);
       if ("run" == arg)
-	raise(("2" == arg) ? SIGSEGV : SIGINT);
+	{
+	  std::cout << "Now running..." << std::endl;
+	  raise(("2" == arg) ? SIGSEGV : SIGINT);
+	}
     }
 }

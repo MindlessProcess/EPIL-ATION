@@ -34,7 +34,7 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
   std::string		str;
 
   profile->setId(id);
-  if (std::string::npos != id.find("SIGSEGV"))
+  if ("SIGSEGV" == id)
     {
       str = std::string("valgrind ");
       str = str + exe_name;
@@ -80,8 +80,11 @@ int		main(int ac, char **av)
 	  std::cout << "Enter 'run' to now execute the Profile" << std::endl;
 	  std::cout << "Or have fun trying to 'kill' it ;)" << std::endl;
 	  std::cin >> arg;
-	} while ("run" != arg || "quit" != arg);
+	} while ("run" != arg && "quit" != arg);
       if ("run" == arg)
-	raise(("2" == arg) ? SIGSEGV : SIGINT);
+	{
+	  std::cout << "Now running..." << std::endl;
+	  raise(("2" == arg) ? SIGSEGV : SIGINT);
+	}
     }
 }
