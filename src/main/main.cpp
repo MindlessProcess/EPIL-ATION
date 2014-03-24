@@ -47,7 +47,7 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
       std::pair<int, int>	my_dst[]=
       	{
       	  std::make_pair(25, 26),
-      	  std::make_pair(31, 59),
+      	  std::make_pair(28, 58),
       	  std::make_pair(82, 83)
       	};
       wr_action->wr_setElem(epil::filetype::DST,
