@@ -3,7 +3,8 @@ LNAME	= epil.a
 GCC	= g++
 RM	= rm -f
 
-CFLAGS	= -W -Wall -Wextra -Werror -std=c++0x
+DEBUG	= 
+CFLAGS	= -W -Wall -Wextra -Werror -std=c++0x $(DEBUG)
 
 SDIR	= main Modules Modules/Actions
 ODIR	= obj/ $(addprefix obj/, $(SDIR))
