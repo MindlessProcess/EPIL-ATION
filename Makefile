@@ -24,7 +24,7 @@ all		: $(NAME)
 lib		: $(LNAME)
 
 $(NAME)		: $(OBJS)
-		@mkdir -p $(BDIR)
+		mkdir -p $(BDIR)
 		$(GCC) -o $(BDIR)/$@ $^
 $(LNAME)	: $(LIBOBJS)
 		ar rc $(LDIR)/$@ $^
@@ -32,14 +32,12 @@ $(LNAME)	: $(LIBOBJS)
 $(OBJS)		: | $(ODIR)
 $(LIBOBJS)	: | $(LODIR)
 $(ODIR) 	:
-		@mkdir -p $(ODIR)
+		mkdir -p $(ODIR)
 $(LODIR)	:
 		mkdir -p $(LODIR)
 obj/%.o		: src/%.cpp
-		echo "IN FIRST TARGET"
 		$(GCC) $(CFLAGS) $(INCS) -o $@ -c $<
 lib/obj/%.o	: lib/src/%.cpp
-		echo "IN SECOND TARGET"
 		$(GCC) $(CFLAGS) $(INCS) -o $@ -c $<
 
 clean		:
