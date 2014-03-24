@@ -3,24 +3,17 @@
 #include	<string>
 #include	<iostream>
 
-#include	"Epil.hh"
-#include	"Action.hh"
-#include	"ActionWrite.hh"
-#include	"ActionCompile.hh"
-#include	"ActionExec.hh"
+#include	<epil/Epil.hh>
+#include	<epil/Action.hh>
 
 static std::string	exe_name;
 static epil::Epil	*my_epil;
 
 void		sig_handler(int signum)
 {
-  std::cout << "In sig_handler: " << signum << std::endl;
-  std::cout << "SIGSEGV: " << SIGSEGV << std::endl;
-  std::cout << "SIGINT: " << SIGINT << std::endl;
   switch (signum)
     {
     case SIGSEGV:
-      std::cout << "In SIGSEV switch" << std::endl;
       my_epil->useProfile("SIGSEGV");
       break;
     case SIGINT:
@@ -46,13 +39,11 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
 
       std::pair<int, int>	my_dst[]=
       	{
-      	  std::make_pair(25, 26),
-      	  std::make_pair(28, 58),
-      	  std::make_pair(82, 83)
+      	  std::make_pair(24, 25),
+      	  std::make_pair(27, 57),
+      	  std::make_pair(81, 82)
       	};
-      wr_action->wr_setElem(epil::filetype::DST,
-			    "src/main/main.cpp",
-			    new epil::BlockList(std::list<std::pair<int, int> >(my_dst, my_dst + sizeof(my_dst) / sizeof(std::pair<int, int>))));
+      wr_action->wr_setElem(epil::filetype::DST, "src/main/main.cpp", new epil::BlockList(std::list<std::pair<int, int> >(my_dst, my_dst + sizeof(my_dst) / sizeof(std::pair<int, int>))));
 
       std::pair<int, int>	my_src[]=
       	{
@@ -104,16 +95,9 @@ int		main(int ac, char **av)
 	{
 	  std::cout << "Enter 'run' to now execute the Profile" << std::endl;
 	  std::cout << "Or have fun trying to 'kill' it ;)" << std::endl;
-<<<<<<< HEAD
-	  std::cin >> arg;
-	  std::cout << "You chose : " << arg << std::endl;
-	} while ("run" != arg && "quit" != arg);
-      if ("run" == arg)
-=======
 	  std::cin >> run;
 	} while ("run" != run && "quit" != run && "exit" != run);
       if ("run" == run)
->>>>>>> 56892db997aac81ff39a5a8f7e963ae9ee63c6ca
 	{
 	  std::cout << "Now running..." << std::endl;
 	  raise(("2" == arg) ? SIGSEGV : SIGINT);
