@@ -28,6 +28,7 @@ void	Epil::loadProfile(Profile *profile)
 
 void	Epil::useProfile(std::string const &id)
 {
+  std::cout << "====In USE_PROFILE()====" << std::endl;
   for (std::list<Profile*>::iterator it = this->_profileList.begin();
        it != this->_profileList.end(); ++it)
     {

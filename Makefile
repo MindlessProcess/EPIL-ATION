@@ -20,7 +20,7 @@ LIBOBJS	= $(subst lib/src,lib/obj,$(LIBSRCS:.cpp=.o))
 INCS	= $(foreach d, $(HDIR), -Iheaders/$d)
 HDRS	= $(shell find headers/ \( -iname "*.hpp" -iname "*.hh" -iname "*.h" \))
 
-all		: $(NAME)
+all		: lib $(NAME)
 lib		: $(LNAME)
 
 $(NAME)		: $(OBJS)

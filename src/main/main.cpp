@@ -14,13 +14,19 @@ static epil::Epil	*my_epil;
 
 void		sig_handler(int signum)
 {
+  std::cout << "In sig_handler: " << signum << std::endl;
+  std::cout << "SIGSEGV: " << SIGSEGV << std::endl;
+  std::cout << "SIGINT: " << SIGINT << std::endl;
   switch (signum)
     {
     case SIGSEGV:
+      std::cout << "In SIGSEV switch" << std::endl;
       my_epil->useProfile("SIGSEGV");
       break;
     case SIGINT:
       my_epil->useProfile("Debug");
+      break;
+    default:
       break;
     }
 }
@@ -44,7 +50,9 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
       	  std::make_pair(31, 59),
       	  std::make_pair(82, 83)
       	};
-      wr_action->wr_setElem(epil::filetype::DST, "src/main/main.cpp", new epil::BlockList(std::list<std::pair<int, int> >(my_dst, my_dst + sizeof(my_dst) / sizeof(std::pair<int, int>))));
+      wr_action->wr_setElem(epil::filetype::DST,
+			    "src/main/main.cpp",
+			    new epil::BlockList(std::list<std::pair<int, int> >(my_dst, my_dst + sizeof(my_dst) / sizeof(std::pair<int, int>))));
 
       std::pair<int, int>	my_src[]=
       	{
@@ -95,6 +103,7 @@ int		main(int ac, char **av)
 	  std::cout << "Enter 'run' to now execute the Profile" << std::endl;
 	  std::cout << "Or have fun trying to 'kill' it ;)" << std::endl;
 	  std::cin >> arg;
+	  std::cout << "You chose : " << arg << std::endl;
 	} while ("run" != arg && "quit" != arg);
       if ("run" == arg)
 	{
