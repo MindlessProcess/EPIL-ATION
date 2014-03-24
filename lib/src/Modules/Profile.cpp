@@ -40,41 +40,41 @@ std::list<Action*>  &Profile::getActionList()
 /**
  * Action order functions
  */
-bool  Profile::changeActionOrder(std::string const &first_id, std::string const &second_id)
-{
-  Action *first_action = NULL;
-  Action *second_action = NULL;
+// bool  Profile::changeActionOrder(std::string const &first_id, std::string const &second_id)
+// {
+//   Action *first_action = NULL;
+//   Action *second_action = NULL;
 
-  for (std::list<Action*>::iterator it = this->_actionList.begin(); it != _actionList.end(); ++it)
-    {
-      if (!(*it)->getId().compare(first_id))
-	{
-	  if ((first_action = dynamic_cast<ActionWrite*>(*it)) == NULL)
-	    if ((first_action = dynamic_cast<ActionCompile*>(*it)) == NULL)
-	      if ((first_action = dynamic_cast<ActionExec*>(*it)) == NULL)
-	  	return (false);
-	  if (second_action != NULL)
-	    break;
-	  else
-	    continue;
-	}
-      if (!(*it)->getId().compare(second_id))
-	{
-	  if ((second_action = dynamic_cast<ActionWrite*>(*it)) == NULL)
-	    if ((second_action = dynamic_cast<ActionCompile*>(*it)) == NULL)
-	      if ((second_action = dynamic_cast<ActionExec*>(*it)) == NULL)
-	  	return (false);
-	  if (first_action != NULL)
-	    break;
-	  else
-	    continue;
-	}
-    }
-  if (first_action == NULL || second_action == NULL)
-    return (false);
-  std::iter_swap(first_action, second_action);
-  return (true);
-}
+//   for (std::list<Action*>::iterator it = this->_actionList.begin(); it != _actionList.end(); ++it)
+//     {
+//       if (!(*it)->getId().compare(first_id))
+// 	{
+// 	  if ((first_action = dynamic_cast<ActionWrite*>(*it)) == NULL)
+// 	    if ((first_action = dynamic_cast<ActionCompile*>(*it)) == NULL)
+// 	      if ((first_action = dynamic_cast<ActionExec*>(*it)) == NULL)
+// 	  	return (false);
+// 	  if (second_action != NULL)
+// 	    break;
+// 	  else
+// 	    continue;
+// 	}
+//       if (!(*it)->getId().compare(second_id))
+// 	{
+// 	  if ((second_action = dynamic_cast<ActionWrite*>(*it)) == NULL)
+// 	    if ((second_action = dynamic_cast<ActionCompile*>(*it)) == NULL)
+// 	      if ((second_action = dynamic_cast<ActionExec*>(*it)) == NULL)
+// 	  	return (false);
+// 	  if (first_action != NULL)
+// 	    break;
+// 	  else
+// 	    continue;
+// 	}
+//     }
+//   if (first_action == NULL || second_action == NULL)
+//     return (false);
+//   std::iter_swap(first_action, second_action);
+//   return (true);
+// }
 void  Profile::revertActionOrder()
 {
   this->_actionList.reverse();

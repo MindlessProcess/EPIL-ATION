@@ -43,13 +43,14 @@ namespace epil
 
       static inline bool add_extension(std::string &dst_str, std::string const &src_str)
       {
-        // size_t size = dst_str.find('.');
+	size_t size;
+
+	if ((size = dst_str.find('.')) == std::string::npos)
+	  return (false);
         // std::string new_string(dst_str.substr(0, size)+src_str+dst_str.substr(size));
+        dst_str = std::string(dst_str.substr(0, size)+src_str+dst_str.substr(size));
 
-        // dst_str = new_string;
-
-        // return (true);
-        return (std::string(dst_str.substr(0, dst_str.find('.')) + src_str + dst_str.substr(dst_str.find('.'))));
+        return (true);
       }
 
       static inline std::streampos write_until(std::streampos line_pos, std::ifstream &infile, std::ofstream &outfile)

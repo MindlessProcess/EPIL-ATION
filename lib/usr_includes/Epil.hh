@@ -22,7 +22,7 @@ namespace epil
   public:
     Epil();
     ~Epil();
-    void loadProfile(Profile*);
+    bool loadProfile(Profile*);
     void useProfile(std::string const&);
     void wr_setDst(std::string const&, epil::BlockList const&); //DST_FILE, BLOCK
     void wr_setSrc(std::string const&, epil::BlockList const&); //SRC_FILE, BLOCK

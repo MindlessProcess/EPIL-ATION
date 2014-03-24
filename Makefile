@@ -45,8 +45,14 @@ lib/obj/%.o	: lib/src/%.cpp
 clean		:
 		$(RM) $(OBJS)
 		$(RM) -r $(ODIR)
+libclean	:
+		$(RM) $(LIBOBJS)
+		$(RM) -r $(LODIR)
 fclean		: clean
 		$(RM) $(BDIR)/$(NAME)
-re		: fclean all
+libfclean	: libclean
+		$(RM) $(LDIR)/$(LNAME)
+allfclean	: fclean libfclean
+re		: fclean libfclean all lib
 
-.PHONY		: all bin clean fclean re
+.PHONY		: all lib clean libclean fclean libfclean allfclean re
