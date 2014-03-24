@@ -40,7 +40,7 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
   std::string		str;
 
   profile->setId(id);
-  if (id == "SIGSEGV")
+  if ("SIGSEGV" == id)
     {
       wr_action = new epil::ActionWrite("correct");
 
@@ -58,7 +58,7 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
       	{
       	  std::make_pair(25, 27),
       	  std::make_pair(29, 43),
-      	  std::make_pair(66, 67)
+      	  std::make_pair(67, 68)
       	};
       wr_action->wr_setElem(epil::filetype::SRC, "misc/foo.cpp", new epil::BlockList(std::list<std::pair<int, int> >(my_src, my_src + sizeof(my_src) / sizeof(std::pair<int, int>))));
 
@@ -80,6 +80,7 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
 int		main(int ac, char **av)
 {
   std::string	arg;
+  std::string	run;
 
   (void) ac;
   my_epil = new epil::Epil();
@@ -91,21 +92,28 @@ int		main(int ac, char **av)
   std::cin >> arg;
   if ("1" == arg || "2" == arg)
     {
-      signal(SIGINT, sig_handler);
-      signal(SIGSEGV, sig_handler);
-
       std::cout << exe_name << " option:" << arg << std::endl;
       set_profile(("2" == arg) ? "SIGSEGV" : "Debug", my_epil);
       std::cout << "Profile " << (("2" == arg) ? "SIGSEGV" : "Debug");
       std::cout << " is now loaded." << std::endl;
+
+      signal(SIGINT, sig_handler);
+      signal(SIGSEGV, sig_handler);
+
       do
 	{
 	  std::cout << "Enter 'run' to now execute the Profile" << std::endl;
 	  std::cout << "Or have fun trying to 'kill' it ;)" << std::endl;
+<<<<<<< HEAD
 	  std::cin >> arg;
 	  std::cout << "You chose : " << arg << std::endl;
 	} while ("run" != arg && "quit" != arg);
       if ("run" == arg)
+=======
+	  std::cin >> run;
+	} while ("run" != run && "quit" != run && "exit" != run);
+      if ("run" == run)
+>>>>>>> 56892db997aac81ff39a5a8f7e963ae9ee63c6ca
 	{
 	  std::cout << "Now running..." << std::endl;
 	  raise(("2" == arg) ? SIGSEGV : SIGINT);
