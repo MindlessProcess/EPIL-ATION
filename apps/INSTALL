@@ -1,0 +1,17 @@
+How-to install Epil for application-use :
+
+sudo mkdir /usr/include/epil
+sudo cp -r your_epil_dir/lib/usr_includes/* /usr/include/epil/
+cd your_epil_dir; make lib
+cp your_epil_dir/lib/epil.a apps/your_app/
+
+Now you should be able to start your application !
+Don't forget to include Epil headers like that :
+
+#include <epil/TheHeaderFile.h*>
+
+Header directories :
+
+epil/
+epil/utils/
+epil/exceptions/
