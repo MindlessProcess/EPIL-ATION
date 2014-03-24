@@ -1,4 +1,37 @@
-Project EPILATION:
+-----------------
+|| EPIL(ATION)  |
+-----------------
+
+------------
+| Summary: |
+------------
+1. What is Epil ?
+  1.1 A CPP focused library
+  1.2 Designed for runtime modification
+2. Epil's architecture
+  2.1 3 main parts
+  2.2 The user-interface
+  2.3 Core and Modules 
+  2.4 The Util side
+3. How-to
+  3.1 Make a program Epil-friendly
+  3.2 Run Epil
+  3.3 Short examples
+4. Applications examples
+  4.1 Signal handling application
+  4.2 Exception catcher application
+5. Credits
+
+
+
+===============================================
+===============================================
+===============================================
+===============================================
+===============================================
+===============================================
+===============================================
+===============================================
 
 Steps list :
 -modify code	CS
