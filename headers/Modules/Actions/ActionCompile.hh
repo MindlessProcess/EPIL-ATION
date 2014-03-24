@@ -5,13 +5,15 @@
 // Login   <guillo_e@epitech.net>
 // 
 // Started on  Tue Mar  4 15:10:20 2014 Lyoma Guillou
-// Last update Tue Mar 11 11:38:34 2014 Lyoma Guillou
+// Last update Mon Mar 24 16:05:05 2014 Lyoma Guillou
 //
 
 #ifndef		EPIL_SYSTEM_ACTIONCOMPILE_HH_
 # define	EPIL_SYSTEM_ACTIONCOMPILE_HH_
 
 # include	"Action.hh"
+
+# include	"incomplete_action.hpp"
 
 namespace	epil
 {

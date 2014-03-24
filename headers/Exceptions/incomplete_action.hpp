@@ -1,3 +1,6 @@
+#ifndef INCCOMPLETE_ACTION_HPP_
+#define INCCOMPLETE_ACTION_HPP_
+
 #include <iostream>
 #include <sstream>
 #include <exception>
@@ -27,3 +30,5 @@ namespace epil
     };
   };
 };
+
+#endif /* INCCOMPLETE_ACTION_HPP_ */

@@ -5,7 +5,7 @@
 // Login   <guillo_e@epitech.net>
 // 
 // Started on  Sat Mar  8 14:39:47 2014 Lyoma Guillou
-// Last update Tue Mar 18 14:07:47 2014 Lyoma Guillou
+// Last update Mon Mar 24 16:00:02 2014 Lyoma Guillou
 //
 
 #include	<unistd.h>
@@ -39,9 +39,9 @@ ActionCompile::ActionCompile(std::string const &id, std::string const &cmd, std:
   else
     {
       if (cmd.empty())
-	std::cerr << "Error: No compiler set" << std::endl;
+	throw exceptions::incomplete_action("Error: No compiler set");
       if (obj.empty())
-	std::cerr << "Error: No source files set" << std::endl;
+	throw exceptions::incomplete_action("Error: No source files set");
     }
 }
 
@@ -60,7 +60,7 @@ inline bool	ActionCompile::_isValidPath()
 {
   if (0 == access(this->_path.c_str(), F_OK))
     return true;
-  std::cerr << "Error: Access() could not find the file" << std::endl;
+  throw exceptions::incomplete_action("Error: Access() could not find the file");
   return false;
 }
 
@@ -68,7 +68,7 @@ inline bool	ActionCompile::_changeDir()
 {
   if (0 == chdir(this->_path.c_str()))
     return true;
-  std::cerr << "Error: Chdir() could not open directory" << std::endl;
+  throw exceptions::incomplete_action("Error: Chdir() could not open directory");
   return false;
 }
 
@@ -89,7 +89,7 @@ void		ActionCompile::apply()
 
   pid = fork();
   if (0 > pid)
-    std::cerr << "Fork error" << std::endl;
+    throw exceptions::incomplete_action("Fork error");
   if (0 == pid)
     {
       this->_format_path();

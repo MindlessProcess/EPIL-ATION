@@ -5,7 +5,7 @@
 // Login   <guillo_e@epitech.net>
 // 
 // Started on  Tue Mar  4 15:40:08 2014 Lyoma Guillou
-// Last update Tue Mar 11 11:29:59 2014 Lyoma Guillou
+// Last update Mon Mar 24 16:05:05 2014 Lyoma Guillou
 //
 
 #include	<string.h>
@@ -79,11 +79,11 @@ void		ActionExec::apply()
   pid = fork();
   if (0 > pid)
     {
-      std::cerr << "Fork Error" << std::endl;
+      throw exceptions::incomplete_action("Fork Error");
       return;
     }
   if (0 == pid && 0 > (execvp(this->_arg[0], this->_arg)))
-    std::cerr << "Error: Child process could not execute" << std::endl;
+    throw exceptions::incomplete_action("Error: Child process could not execute");
   else
     wait(0);
 }
