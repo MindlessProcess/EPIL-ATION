@@ -36,11 +36,12 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
   if ("SIGSEGV" == id)
     {
       wr_action = new epil::ActionWrite("correct");
+      cc_action = new epil::ActionCompile("compile", "g++", "-std=c++0x", "src/main/main.cpp lib/epil.a");
 
       std::pair<int, int>	my_dst[]=
       	{
       	  std::make_pair(24, 25),
-      	  std::make_pair(27, 57),
+      	  std::make_pair(27, 59),
       	  std::make_pair(81, 82)
       	};
       wr_action->wr_setElem(epil::filetype::DST, "src/main/main.cpp", new epil::BlockList(std::list<std::pair<int, int> >(my_dst, my_dst + sizeof(my_dst) / sizeof(std::pair<int, int>))));
@@ -54,15 +55,14 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
       wr_action->wr_setElem(epil::filetype::SRC, "misc/foo.cpp", new epil::BlockList(std::list<std::pair<int, int> >(my_src, my_src + sizeof(my_src) / sizeof(std::pair<int, int>))));
 
       profile->setAction(wr_action);
+      profile->setAction(cc_action);
     }
   else
     {
       str = std::string("gdb ");
       str = str + exe_name;
-      cc_action = new epil::ActionCompile("remake", "make re DEBUG=-ggdb3", "`find ~/ -name epil-ation`");
       ex_action = new epil::ActionExec("debug", str.c_str());
 
-      profile->setAction(cc_action);
       profile->setAction(ex_action);
     }
   my_epil->loadProfile(profile);
