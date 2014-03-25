@@ -36,9 +36,7 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
   profile->setId(id);
   if ("SIGSEGV" == id)
     {
-      str = std::string("valgrind ");
-      str = str + exe_name;
-      ex_action = new epil::ActionExec("valgr", str.c_str());
+      ex_action = new epil::ActionExec("valgr", "valgrind ./a.out");
       profile->setAction(ex_action);
     }
   else
@@ -46,7 +44,7 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
       str = std::string("gdb ");
       str = str + exe_name;
       cc_action = new epil::ActionCompile("remake", "make re DEBUG=-ggdb3", "`find ~/ -name epil-ation`");
-      ex_action = new epil::ActionExec("debug", str.c_str());
+      ex_action = new epil::ActionExec("debug", str);
 
       profile->setAction(cc_action);
       profile->setAction(ex_action);

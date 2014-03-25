@@ -37,32 +37,36 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
     {
       wr_action = new epil::ActionWrite("correct");
       cc_action = new epil::ActionCompile("compile", "g++", "-std=c++0x", "src/main/main.cpp lib/epil.a");
+      ex_action = new epil::ActionExec("execute", "./a.out");
 
       std::pair<int, int>	my_dst[]=
       	{
       	  std::make_pair(24, 25),
-      	  std::make_pair(27, 59),
-      	  std::make_pair(81, 82)
+      	  std::make_pair(27, 61),
+      	  std::make_pair(85, 86)
       	};
       wr_action->wr_setElem(epil::filetype::DST, "src/main/main.cpp", new epil::BlockList(std::list<std::pair<int, int> >(my_dst, my_dst + sizeof(my_dst) / sizeof(std::pair<int, int>))));
 
       std::pair<int, int>	my_src[]=
       	{
       	  std::make_pair(25, 27),
-      	  std::make_pair(29, 43),
-      	  std::make_pair(67, 68)
+      	  std::make_pair(29, 41),
+      	  std::make_pair(65, 66)
       	};
       wr_action->wr_setElem(epil::filetype::SRC, "misc/foo.cpp", new epil::BlockList(std::list<std::pair<int, int> >(my_src, my_src + sizeof(my_src) / sizeof(std::pair<int, int>))));
 
       profile->setAction(wr_action);
       profile->setAction(cc_action);
+      profile->setAction(ex_action);
     }
   else
     {
       str = std::string("gdb ");
       str = str + exe_name;
-      ex_action = new epil::ActionExec("debug", str.c_str());
+      cc_action = new epil::ActionCompile("recompile", "make re");
+      ex_action = new epil::ActionExec("debug", str);
 
+      profile->setAction(cc_action);
       profile->setAction(ex_action);
     }
   my_epil->loadProfile(profile);

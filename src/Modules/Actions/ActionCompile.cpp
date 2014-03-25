@@ -5,7 +5,7 @@
 // Login   <guillo_e@epitech.net>
 // 
 // Started on  Sat Mar  8 14:39:47 2014 Lyoma Guillou
-// Last update Mon Mar 24 16:00:02 2014 Lyoma Guillou
+// Last update Tue Mar 25 12:07:40 2014 Lyoma Guillou
 //
 
 #include	<unistd.h>
@@ -96,7 +96,7 @@ void		ActionCompile::apply()
       if (!_isWorkingDir())
 	if (!_isValidPath() || !_changeDir())
 	  exit(EXIT_FAILURE);
-      std::cout << this->_cmd << std::endl;
+      std::cout << "Compiling: " << this->_cmd << std::endl;
       system(this->_cmd.c_str());
       exit(EXIT_SUCCESS);
     }
