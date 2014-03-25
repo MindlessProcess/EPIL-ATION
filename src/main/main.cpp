@@ -22,12 +22,12 @@ void		sig_handler(int signum)
     default:
       break;
     }
+  exit(EXIT_SUCCESS);
 }
 
 void		set_profile(std::string const &id, epil::Epil *my_epil)
 {
   epil::Profile		*profile = new epil::Profile();
-  epil::ActionWrite	*wr_action;
   epil::ActionCompile	*cc_action;
   epil::ActionExec	*ex_action;
   std::string		str;
@@ -35,27 +35,10 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
   profile->setId(id);
   if ("SIGSEGV" == id)
     {
-      wr_action = new epil::ActionWrite("correct");
-      cc_action = new epil::ActionCompile("compile", "g++", "-std=c++0x", "src/main/main.cpp lib/epil.a");
-
-      std::pair<int, int>	my_dst[]=
-      	{
-      	  std::make_pair(24, 25),
-      	  std::make_pair(27, 59),
-      	  std::make_pair(81, 82)
-      	};
-      wr_action->wr_setElem(epil::filetype::DST, "src/main/main.cpp", new epil::BlockList(std::list<std::pair<int, int> >(my_dst, my_dst + sizeof(my_dst) / sizeof(std::pair<int, int>))));
-
-      std::pair<int, int>	my_src[]=
-      	{
-      	  std::make_pair(25, 27),
-      	  std::make_pair(29, 43),
-      	  std::make_pair(67, 68)
-      	};
-      wr_action->wr_setElem(epil::filetype::SRC, "misc/foo.cpp", new epil::BlockList(std::list<std::pair<int, int> >(my_src, my_src + sizeof(my_src) / sizeof(std::pair<int, int>))));
-
-      profile->setAction(wr_action);
-      profile->setAction(cc_action);
+      str = std::string("valgrind ");
+      str = str + exe_name;
+      ex_action = new epil::ActionExec("valgr", str.c_str());
+      profile->setAction(ex_action);
     }
   else
     {
@@ -79,7 +62,7 @@ int		main(int ac, char **av)
 
   std::cout << "Please select the implementation you want to execute" << std::endl;
   std::cout << "1: Sigint will remake and launch gdb" << std::endl;
-  std::cout << "2: Segfault behavior will edit main.cpp" << std::endl;
+  std::cout << "2: Segfault behavior (valgrind)" << std::endl;
   std::cin >> arg;
   if ("1" == arg || "2" == arg)
     {
