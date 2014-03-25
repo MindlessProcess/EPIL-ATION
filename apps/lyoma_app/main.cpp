@@ -37,13 +37,12 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
     {
       wr_action = new epil::ActionWrite("correct");
       cc_action = new epil::ActionCompile("compile", "g++", "-std=c++0x", "src/main/main.cpp lib/epil.a");
-      ex_action = new epil::ActionExec("execute", "./a.out");
 
       std::pair<int, int>	my_dst[]=
       	{
       	  std::make_pair(24, 25),
-      	  std::make_pair(27, 61),
-      	  std::make_pair(85, 86)
+      	  std::make_pair(27, 59),
+      	  std::make_pair(83, 84)
       	};
       wr_action->wr_setElem(epil::filetype::DST, "src/main/main.cpp", new epil::BlockList(std::list<std::pair<int, int> >(my_dst, my_dst + sizeof(my_dst) / sizeof(std::pair<int, int>))));
 
@@ -57,7 +56,6 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
 
       profile->setAction(wr_action);
       profile->setAction(cc_action);
-      profile->setAction(ex_action);
     }
   else
     {
