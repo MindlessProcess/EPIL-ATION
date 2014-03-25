@@ -30,6 +30,7 @@
   1.1 A C++ focused library
     Epil is a C++ static library composed of several classes structured in different sections.
     The main goal of Epil is a program-inside utilization, to be implemented in an existing program.
+
   1.2 Designed for runtime modification
     Once implemented in one's program, Epil allows the latter to modify itself during runtime.
     Thus, it permits rewriting, recompiling and rerunning a source code while the programm is running.
@@ -38,10 +39,23 @@
 2. Epil's architecture
   2.1 Three main parts
     Epil is divided in three main parts, only two being really usable by the program.
+    When you want to use Epil you should instanciate an Epil object preferably in the highest call scope.
+
   2.2 The user-interface
-    l
+    The user-interface is represented by the Profile object. You should create one after instanciation.
+    The user is now free to create a list of Action within a Profile object. The Actions should be added
+    in the Profile with: setAction(my_action).
+    To integrate the Profile in Epil, the user should use: loadProfile(my_profile) from the Epil object.
+    
   2.3 Core and Modules
-    l  
+    The Modules are all the necessary tools for a user to create different Actions. The available actions
+    are:
+	-ActionWrite (please read below)
+	-ActionCompile
+	-ActionExec
+    The ActionWrite will need a BlockList tool to set a range of lines to read/write from a file. 
+    BlockList can be instanciated with a pair of ints (std::pair<int, int>) or a list of pair of ints
+
   2.4 The Utils side
     l
 3. How-to

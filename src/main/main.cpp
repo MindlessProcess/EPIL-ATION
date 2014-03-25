@@ -22,12 +22,12 @@ void		sig_handler(int signum)
     default:
       break;
     }
-  exit(EXIT_SUCCESS);
 }
 
 void		set_profile(std::string const &id, epil::Epil *my_epil)
 {
   epil::Profile		*profile = new epil::Profile();
+  epil::ActionWrite	*wr_action;
   epil::ActionCompile	*cc_action;
   epil::ActionExec	*ex_action;
   std::string		str;
@@ -35,12 +35,6 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
   profile->setId(id);
   if ("SIGSEGV" == id)
     {
-<<<<<<< HEAD
-      str = std::string("valgrind ");
-      str = str + exe_name;
-      ex_action = new epil::ActionExec("valgr", str.c_str());
-      profile->setAction(ex_action);
-=======
       wr_action = new epil::ActionWrite("correct");
       cc_action = new epil::ActionCompile("compile", "g++", "-std=c++0x", "src/main/main.cpp lib/epil.a");
 
@@ -62,7 +56,6 @@ void		set_profile(std::string const &id, epil::Epil *my_epil)
 
       profile->setAction(wr_action);
       profile->setAction(cc_action);
->>>>>>> 09aab66c4cd3783e7f196e1cebf6842c88f10826
     }
   else
     {
@@ -88,7 +81,7 @@ int		main(int ac, char **av)
 
   std::cout << "Please select the implementation you want to execute" << std::endl;
   std::cout << "1: Sigint will remake and launch gdb" << std::endl;
-  std::cout << "2: Segfault behavior (valgrind)" << std::endl;
+  std::cout << "2: Segfault behavior will edit main.cpp" << std::endl;
   std::cin >> arg;
   if ("1" == arg || "2" == arg)
     {
