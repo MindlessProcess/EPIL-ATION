@@ -17,9 +17,7 @@
   3.1 Make a program Epil-friendly
   3.2 Run Epil
   3.3 Short examples
-4. Applications examples
-  4.1 Signal handling application
-  4.2 Exception catcher application
+4. Application example
 5. Credits
 
 
@@ -120,8 +118,7 @@
 	return 0;
       }
 
-4. Applications examples
-  4.1 Signal handling application
+4. Application example
    lyoma_app:
 	The application has been defined to manage SIGINT and SIGSEGV and has
    	the following behaviors:
@@ -143,9 +140,6 @@
 
      SIGINT  - Unchanged from ./lyoma_app
 	
-  4.2 Exception catcher application
-      lucas_app:
-
 5. Credits
   Epil is developped by Lyoma Guillou and Lucas Merlette since January 2014.
   It is an Epitech free project of the third year.
