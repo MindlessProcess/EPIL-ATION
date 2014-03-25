@@ -102,7 +102,7 @@ void ActionWrite::apply()
   std::hash<std::string> str_hash;
   std::vector<std::string> file_vector;
   boost::split(file_vector, this->_dst_file, boost::algorithm::is_any_of("/"));
-  utils::FileSystem::add_extension(file_vector[file_vector.size() - 1], + std::to_string(str_hash(this->_dst_file)));
+  utils::FileSystem::add_extension(file_vector[file_vector.size() - 1], std::to_string(str_hash(this->_dst_file)));
   std::string save_cmd("mv " + this->_dst_file + " " + utils::StringOperations::containerToString(file_vector, "/"));
   for (std::vector<std::string>::iterator it = file_vector.begin(); it != file_vector.end(); ++it)
     {
