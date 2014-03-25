@@ -1,0 +1,67 @@
+Steps list :
+-modify code	CS
+-recompile	CS
+-re execute	CS
+-action list	CA
+-set action	CA
+-del action	CA
+-get action	CA
+-next action	CA
+-apply action	CA
+
+CS -> Class System
+CA -> Class Action
+
+Module SHAVE =
+Structure
+Handling
+Algorithmic
+Variable
+Envelops
+
+Module HAIR =
+Human
+Advanced
+Interfaced
+Requests
+
+### Project Applications Ideas ###
+
+1. Signal handling (SIGSEGV, SIGPIPE, SIGQUIT, SIGBUS... etc. etc.)
+2. Undefined Behavior (exceptions, debugging)
+3. Conception building from scrap code
+
+1. - Signal handling -
+
+   1.1 - The signal overloading
+
+       If your program sends a signal you wish to manage when it occurs
+       EPIL library should be called within the signal handling for all
+       the signals you want to catch.
+
+   1.2 - Common signals
+
+       Common signals that are expected to be used are the Segmentation
+       Errors from memory allocation errors. EPIL should not be used
+       for glibc errors where the problem comes from memory corruption.
+
+2. - Undefined Behavior -
+
+   2.1 - Exceptions
+
+       You could call EPIL in every exceptions you have catched to
+       manually change the behavior on the exception throwed
+
+   2.2 - Debugging
+
+       EPIL can also be called for debugging purposes where you wish to
+       test different behaviors, because the editing, recompiling and
+       re-execution are simplified.
+
+3. - Conception building from scrap code -
+
+   3.1 - Simple implementations
+
+       Implementations can be very simple but can also contain bugs.
+       EPIL can be handy to manage this kind of issues if a bug is to
+       be found on any short written codes.

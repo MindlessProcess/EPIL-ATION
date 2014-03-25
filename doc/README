@@ -42,29 +42,110 @@
     When you want to use Epil you should instanciate an Epil object preferably in the highest call scope.
 
   2.2 The user-interface
-    The user-interface is represented by the Profile object. You should create one after instanciation.
+    The user-interface is represented by the Profile object. You should create one after Epil declaration.
     The user is now free to create a list of Action within a Profile object. The Actions should be added
     in the Profile with: setAction(my_action).
     To integrate the Profile in Epil, the user should use: loadProfile(my_profile) from the Epil object.
     
   2.3 Core and Modules
-    The Modules are all the necessary tools for a user to create different Actions. The available actions
-    are:
-	-ActionWrite (please read below)
-	-ActionCompile
-	-ActionExec
+    The Core and Modules are all the necessary tools for a user to create different Actions. 
+    The available actions are:
+	- ActionWrite (please read below)
+	- ActionCompile
+	- ActionExec
     The ActionWrite will need a BlockList tool to set a range of lines to read/write from a file. 
-    BlockList can be instanciated with a pair of ints (std::pair<int, int>) or a list of pair of ints
+    BlockList can be instanciated with:
+    	 - a pair of ints (std::pair<int, int>)
+	 - a list of pair of ints (std::list<std::pair<int, int> >)
+    BlockList will help you select the range within a destination/source file for writing/reading operations.
+    ActionWrite must set the destination/source file with: 
+    	 void wr_setElem(epil::filetype, std::string filename, BlocList *);
+
+    NOTE: Borderwise pairs will merge into 1 pair.
+    Examples:
+	pair(1, 9), pair(10, 14) => pair(1, 14)
+	pair(3, 14), pair(9, 17) => pair(3, 17)
 
   2.4 The Utils side
-    l
+    The Utils side is a library to make operations within files, strings, containers and streams.
+    They are mainly used in ActionWrite to reach the correct lines to read/write.
+    The user can use them for his personal implementation purposes.
+
 3. How-to
-  3.1 Make a program Epil-friendly
-  3.2 Run Epil
-  3.3 Short examples
+  3.1 Epil's call
+      
+      #include <epil/Epil.h>
+
+      int	main()
+      {
+        // How to instanciate Epil
+	epil::Epil		*my_epil = new epil::Epil();
+
+	return 0;
+      }
+
+  3.2 Use Epil
+
+      #include <string>
+      #include <epil/Epil.h>
+
+      int	main()
+      {
+	std::string		name = "profile name";
+	epil::Epil		*my_epil = new epil::Epil();
+
+	// Make a profile to use Epil
+	epil::Profile 		*my_profile = new epil::Profile(name);
+
+	my_epil->loadProfile(my_profile);
+	my_epil->useProfile(name);
+	return 0;
+      }
+
+  3.3 Short example with Hello World
+
+      #include <string>
+      #include <epil/Epil.h>
+
+      int	main()
+      {
+	std::string		name = "profile name";
+	epil::Epil		*my_epil = new epil::Epil();
+	epil::Profile 		*my_profile = new epil::Profile(name);
+	epil::ActionExec 	*ex_action = new epil::ActionExec("ex_action", "echo 'Hello World'";
+
+	my_profile->setAction(ex_action);
+	my_epil->loadProfile(my_profile);
+	my_epil->useProfile(name);
+	return 0;
+      }
+
 4. Applications examples
   4.1 Signal handling application
+   lyoma_app:
+	The application has been defined to manage SIGINT and SIGSEGV and has
+   	the following behaviors:
+
+    SIGSEGV - It will modify the src/main/main.cpp and compile it with epil.a
+    	      To be able to differenciate the behavior changement the output
+	      of compilation will be a.out and will leave apps/lyoma_app/main.cpp
+	      unchanged.
+
+    SIGINT  - Will just use the makefile using the command "make re" with the flag
+    	      "-ggdb3" and launch a gdb instance. This is very useful if the user
+	      has already in mind a set of debugging criterias.
+
+   a.out:
+	The application will be have a new behavior with the previous signals. It
+	will now exit after managing the signals.
+
+     SIGSEGV - Will now launch valgrind with the instance an instance of ./a.out
+
+     SIGINT  - Unchanged from ./lyoma_app
+	
   4.2 Exception catcher application
+      lucas_app:
+
 5. Credits
   Epil is developped by Lyoma Guillou and Lucas Merlette since January 2014.
   It is an Epitech free project of the third year.
@@ -78,71 +159,3 @@
 ===============================================
 ===============================================
 ===============================================
-
-Steps list :
--modify code	CS
--recompile	CS
--re execute	CS
--action list	CA
--set action	CA
--del action	CA
--get action	CA
--next action	CA
--apply action	CA
-
-CS -> Class System
-CA -> Class Action
-
-Module SHAVE =
-Structure
-Handling
-Algorithmic
-Variable
-Envelops
-
-Module HAIR =
-Human
-Advanced
-Interfaced
-Requests
-
-### Project Applications Ideas ###
-
-1. Signal handling (SIGSEGV, SIGPIPE, SIGQUIT, SIGBUS... etc. etc.)
-2. Undefined Behavior (exceptions, debugging)
-3. Conception building from scrap code
-
-1. - Signal handling -
-
-   1.1 - The signal overloading
-
-       If your program sends a signal you wish to manage when it occurs
-       EPIL library should be called within the signal handling for all
-       the signals you want to catch.
-
-   1.2 - Common signals
-
-       Common signals that are expected to be used are the Segmentation
-       Errors from memory allocation errors. EPIL should not be used
-       for glibc errors where the problem comes from memory corruption.
-
-2. - Undefined Behavior -
-
-   2.1 - Exceptions
-
-       You could call EPIL in every exceptions you have catched to
-       manually change the behavior on the exception throwed
-
-   2.2 - Debugging
-
-       EPIL can also be called for debugging purposes where you wish to
-       test different behaviors, because the editing, recompiling and
-       re-execution are simplified.
-
-3. - Conception building from scrap code -
-
-   3.1 - Simple implementations
-
-       Implementations can be very simple but can also contain bugs.
-       EPIL can be handy to manage this kind of issues if a bug is to
-       be found on any short written codes.
